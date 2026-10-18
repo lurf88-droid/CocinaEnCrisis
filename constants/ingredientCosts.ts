@@ -1,0 +1,17 @@
+export const INGREDIENT_COSTS: Record<string, number> = {
+  huevo: 5,
+  jitomate: 3,
+  queso: 12,
+  pollo: 25,
+  papa: 4,
+  cebolla: 2,
+  frijol: 6,
+  tortilla: 2,
+  chile: 2,
+  ajo: 1,
+  zanahoria: 3,
+  lechuga: 4,
+  aguacate: 10,
+  limon: 2,
+  elote: 6,
+};
