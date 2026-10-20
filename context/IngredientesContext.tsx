@@ -68,7 +68,8 @@ type IngredientesContextType = {
    */
   prepararRecetas: () => void;
 
-  prepararReceta: (id: string) => void;
+  // 👇 CAMBIO 1: Ahora recibe el costo de la receta
+  prepararReceta: (id: string, costoReceta: number) => void;
 };
 
 
@@ -291,10 +292,8 @@ export function IngredientesProvider({
   // ====================================================
 
   /*
-    El presupuesto es un LÍMITE DE COMPRA.
-    No representa una cuenta bancaria.
-    Agregar algo a la despensa NO descuenta dinero.
-    Cocinar tampoco descuenta dinero automáticamente.
+    El presupuesto ahora sí es un LÍMITE DE GASTO.
+    Disminuye al momento de preparar una receta.
   */
   const setPresupuesto = (monto: number) => {
     if (!Number.isFinite(monto)) {
@@ -490,18 +489,24 @@ export function IngredientesProvider({
 
 
   // ====================================================
-  // 👨‍🍳 PREPARAR UNA RECETA
+  // 👨‍🍳 PREPARAR UNA RECETA Y DESCONTAR PRESUPUESTO
   // ====================================================
 
-  const prepararReceta = (id: string) => {
+  // 👇 CAMBIO 2: La función ahora descuenta el dinero
+  const prepararReceta = (id: string, costoReceta: number) => {
     if (!id) return;
 
+    // Descontar del presupuesto (sin que baje de 0)
+    setPresupuestoState(prev => Math.max(0, prev - costoReceta));
+
+    // Registrar en el historial
     const fecha = new Date().toISOString();
     setPreparaciones(prev => registrarPreparacion(prev, id, fecha));
 
+    // Quitar del carrito
     setCarrito(prev => prev.filter(item => item !== id));
 
-    alert('🍳 ¡Receta preparada!\n\nAgregada al historial.');
+    alert(`🍳 ¡Receta preparada!\n\nSe descontaron $${Math.round(costoReceta)} de tu presupuesto.`);
   };
 
 
@@ -571,7 +576,7 @@ export function IngredientesProvider({
 
         confirmarCompra,
         prepararRecetas,
-        prepararReceta,
+        prepararReceta, // Se pasa la nueva función
       }}
     >
       {errorGuardado && (

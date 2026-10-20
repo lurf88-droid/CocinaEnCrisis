@@ -268,9 +268,7 @@ import {
   BURRITO_FRIJOL,
 } from './recetas/burrito-frijol';
 
-import {
-  LICUADO_PLATANO,
-} from './recetas/desayunos_mexicanos/bebidas/licuados/licuado-platano';
+
 
 import {
   PAPAS_HUEVO,
@@ -310,11 +308,25 @@ import {
 
 // BEBIDAS//
 import { AGUA_LIMON_CHIA } from './recetas/bebidas/aguas/agua-limon-chia';
-
-
+import { AGUA_HORCHATA } from './recetas/bebidas/aguas/agua-horchata';
+//LICUADOS//
+import {
+  LICUADO_PLATANO,
+} from './recetas/desayunos_mexicanos/bebidas/licuados/licuado-platano';
 
 //SNACKS//
 import { GUACAMOLE_TRADICIONAL } from './recetas/snacks/guacamole-tradicional';
+
+
+//VEGETARIANOS//
+import { TORTITAS_BROCOLI } from './recetas/vegetarianos/tortitas-brocoli';
+
+
+//ENSALADAS//
+import { ENSALADA_HUERTA } from './recetas/ensaladas/ensalada-huerta';
+import { ENSALADA_CESAR } from './recetas/ensaladas/ensalada-cesar';
+import { ENSALADA_ATUN_ELOTE } from './recetas/ensaladas/ensalada-atun-elote';
+import { ENSALADA_BETABEL_NUEZ } from './recetas/ensaladas/ensalada-betabel-nuez';
 
 //POSTRES//
 import { PLATANOS_FRITOS_CREMA } from './recetas/postres/platanos-fritos-crema';
@@ -447,11 +459,18 @@ export const RECETAS: Receta[] = [
   QUICHE_LORRAINE,
 // BEBIDAS//
 AGUA_LIMON_CHIA,
-
+AGUA_HORCHATA,
 
 //snacks//
 GUACAMOLE_TRADICIONAL,
+//VEGETARIANO//
+TORTITAS_BROCOLI,
 
+//ENSALADAS//
+ENSALADA_HUERTA,
+ENSALADA_ATUN_ELOTE,
+ENSALADA_BETABEL_NUEZ,
+ENSALADA_CESAR,
 //POSTRES//
 PLATANOS_FRITOS_CREMA,
 ];

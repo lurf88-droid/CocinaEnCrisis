@@ -609,32 +609,22 @@ const razonesChef =
               </View>
 
 
-              {onCompraSugerida && (
-
+                           {onCompraSugerida && (
                 <TouchableOpacity
-
                   activeOpacity={0.84}
-
                   style={styles.purchaseButton}
-
                   onPress={onCompraSugerida}
-
                 >
-
                   <AppText style={styles.purchaseButtonText}>
-                    Ver oportunidad
+                    Agregar
                   </AppText>
-
                   <MaterialCommunityIcons
-                    name="arrow-right"
+                    name="cart-plus"
                     size={16}
                     color="#24140A"
                   />
-
                 </TouchableOpacity>
-
               )}
-
 
             </View>
 

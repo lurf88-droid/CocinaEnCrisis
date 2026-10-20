@@ -5,6 +5,7 @@ import React, {
 
 import {
   Alert,
+  ScrollView, // 👈 1. Importamos ScrollView
   StyleSheet,
   TouchableOpacity,
   View,
@@ -19,6 +20,9 @@ import { PantryPreview } from '@/components/home/PantryPreview';
 import { PantryStatusHero } from '@/components/home/PantryStatusHero';
 import { ChefOpportunityCard } from '@/components/home/ChefOpportunityCard';
 import { ChefRecommendationCard } from '@/components/chef/ChefRecommendationCard';
+
+// 👈 2. Importamos la nueva tarjeta pequeña
+import { AlternativeRecipeCard } from '@/components/home/AlternativeRecipeCard';
 
 import { AppText } from '@/components/ui/AppText';
 import { Screen } from '@/components/ui/Screen';
@@ -41,6 +45,8 @@ import {
   Spacing,
 } from '@/constants/theme';
 
+import { obtenerIngrediente } from '@/data/catalogo-ingredientes';
+
 
 // ======================================================
 // 🎛 MODOS DE CHEF LUNA
@@ -52,7 +58,6 @@ type ModeOption = {
   titulo: string;
   descripcion: string;
 };
-
 
 const MODOS: ModeOption[] = [
   { id: 'crisis', icon: '🔥', titulo: 'Crisis', descripcion: 'Decide por mí' },
@@ -69,24 +74,24 @@ const MODOS: ModeOption[] = [
 export default function HomeScreen() {
 
   const { buscarRecetas } = useCiudad();
-  const { ingredientes, presupuesto: presupuestoNum } = useIngredientes();
+  
+  const { 
+    ingredientes, 
+    presupuesto: presupuestoNum,
+    agregarIngrediente 
+  } = useIngredientes();
 
   const [modo, setModo] = useState<ChefMode>('crisis');
 
 
   // ====================================================
-  // 🔎 RESULTADOS
+  // 🔎 RESULTADOS Y DASHBOARD
   // ====================================================
 
   const resultados = useMemo(() => {
     if (ingredientes.length === 0) return [];
     return buscarRecetas(ingredientes, presupuestoNum);
   }, [ingredientes, presupuestoNum, buscarRecetas]);
-
-
-  // ====================================================
-  // 🧠 DASHBOARD CHEF LUNA
-  // ====================================================
 
   const dashboard = ChefEngine.dashboard({
     resultados,
@@ -102,6 +107,7 @@ export default function HomeScreen() {
     recomendacionPrincipal,
     personalidad,
     estadisticas,
+    alternativas, // 👈 3. Extraemos las alternativas
   } = dashboard;
 
 
@@ -148,37 +154,21 @@ export default function HomeScreen() {
 
 
   // ====================================================
-  // 💬 TEXTOS DINÁMICOS DEL BOTÓN PRINCIPAL (AQUÍ ESTÁ LA MAGIA)
+  // 💬 TEXTOS DINÁMICOS DEL BOTÓN PRINCIPAL
   // ====================================================
 
   const textosBoton = {
-    crisis: {
-      eyebrow: 'CRISIS CULINARIA',
-      title: 'Sálvame la comida',
-      subtitle: 'Chef Luna decide qué cocinar por ti',
-    },
-    ahorro: {
-      eyebrow: 'MODO AHORRO',
-      title: 'Cocinar sin gastar',
-      subtitle: 'Aprovecha tu despensa y presupuesto',
-    },
-    rapido: {
-      eyebrow: 'MODO RÁPIDO',
-      title: 'Comer en minutos',
-      subtitle: 'Recetas veloces para hoy',
-    },
-    antojo: {
-      eyebrow: 'MODO ANTOJO',
-      title: 'Darte un gusto',
-      subtitle: 'Lo que más se te antoja hoy',
-    },
+    crisis: { eyebrow: 'CRISIS CULINARIA', title: 'Sálvame la comida', subtitle: 'Chef Luna decide qué cocinar por ti' },
+    ahorro: { eyebrow: 'MODO AHORRO', title: 'Cocinar sin gastar', subtitle: 'Aprovecha tu despensa y presupuesto' },
+    rapido: { eyebrow: 'MODO RÁPIDO', title: 'Comer en minutos', subtitle: 'Recetas veloces para hoy' },
+    antojo: { eyebrow: 'MODO ANTOJO', title: 'Darte un gusto', subtitle: 'Lo que más se te antoja hoy' },
   };
 
   const botonActual = textosBoton[modo] || textosBoton.crisis;
 
 
   // ====================================================
-  // 🔥 SALVAME LA COMIDA (AHORA RESPETA EL MODO ACTUAL)
+  // 🔥 SALVAME LA COMIDA
   // ====================================================
 
   const salvarComida = () => {
@@ -192,16 +182,14 @@ export default function HomeScreen() {
     if (!receta) {
       Alert.alert(
         'Chef Luna necesita un poco más',
-        'Todavía no encuentro una receta suficientemente buena con tu despensa y presupuesto. Agrega uno o dos ingredientes más o ajusta tu presupuesto.'
+        'Todavía no encuentro una receta suficientemente buena con tu despensa y presupuesto.'
       );
       return;
     }
 
     router.push({
       pathname: '/receta/[id]',
-      params: {
-        id: receta.id,
-      },
+      params: { id: receta.id },
     });
   };
 
@@ -383,15 +371,12 @@ export default function HomeScreen() {
             modo={modo}
             compraSugerida={compraSugerida}
             onCompraSugerida={() => {
-              if (recetaOportunidad) {
-                router.push({
-                  pathname: '/receta/[id]',
-                  params: {
-                    id: recetaOportunidad.id,
-                    modo: 'oportunidad',
-                    ingrediente: desbloqueo?.ingrediente,
-                  },
-                });
+              if (desbloqueo?.ingrediente) {
+                agregarIngrediente(desbloqueo.ingrediente);
+                Alert.alert(
+                  '¡Agregado a despensa!',
+                  `${obtenerIngrediente(desbloqueo.ingrediente)?.nombre ?? desbloqueo.ingrediente} ya está en tu cocina.`
+                );
               }
             }}
             onPreparar={() => {
@@ -401,6 +386,38 @@ export default function HomeScreen() {
               });
             }}
           />
+        </View>
+      )}
+
+
+      {/* 👇 4. NUEVO CARRUSEL ESTILO NETFLIX */}
+      {alternativas && alternativas.length > 0 && (
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <View>
+              <AppText style={styles.sectionEyebrow}>MÁS OPCIONES</AppText>
+              <AppText style={styles.sectionTitle}>Otras recetas para ti</AppText>
+            </View>
+          </View>
+
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.carouselContainer}
+          >
+            {alternativas.map((receta) => (
+              <AlternativeRecipeCard
+                key={receta.id}
+                receta={receta}
+                onPress={() => {
+                  router.push({
+                    pathname: '/receta/[id]',
+                    params: { id: receta.id },
+                  });
+                }}
+              />
+            ))}
+          </ScrollView>
         </View>
       )}
 
@@ -417,18 +434,17 @@ export default function HomeScreen() {
           <ChefOpportunityCard
             receta={recetaOportunidad}
             razones={[
-              `🔥 Con ${desbloqueo.ingrediente} desbloqueas esta receta`,
+              `🔥 Con ${obtenerIngrediente(desbloqueo.ingrediente)?.nombre ?? desbloqueo.ingrediente} desbloqueas esta receta`,
               desbloqueo.razon,
             ]}
             onPress={() => {
-              router.push({
-                pathname: '/receta/[id]',
-                params: {
-                  id: recetaOportunidad.id,
-                  modo: 'oportunidad',
-                  ingrediente: desbloqueo.ingrediente,
-                },
-              });
+              if (desbloqueo?.ingrediente) {
+                agregarIngrediente(desbloqueo.ingrediente);
+                Alert.alert(
+                  '¡Agregado a despensa!',
+                  `${obtenerIngrediente(desbloqueo.ingrediente)?.nombre ?? desbloqueo.ingrediente} ya está en tu cocina.`
+                );
+              }
             }}
           />
         </View>
@@ -459,17 +475,17 @@ export default function HomeScreen() {
   );
 }
 
-
-// ======================================================
-// 🎨 ESTILOS (Se mantienen exactamente igual)
-// ======================================================
-
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: Spacing.xl,
     paddingTop: 28,
     paddingBottom: 180,
     backgroundColor: KitchenColors.background,
+  },
+  // 👇 5. ESTILO PARA EL CARRUSEL
+  carouselContainer: {
+    paddingRight: 20,
+    paddingBottom: 10,
   },
   hero: {
     backgroundColor: '#211510',

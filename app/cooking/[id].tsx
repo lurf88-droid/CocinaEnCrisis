@@ -5,7 +5,7 @@ import {
 } from 'react';
 
 import {
-   Alert,
+  Alert,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -45,8 +45,10 @@ import {
 
 export default function CookingScreen() {
 
+  // 👇 AGREGAMOS EL PARÁMETRO 'costo'
   const {
     id,
+    costo,
   } = useLocalSearchParams();
 
 
@@ -150,23 +152,22 @@ export default function CookingScreen() {
 
 
           if (
-          
-  typeof datos?.paso === 'number' &&
-  Number.isInteger(datos.paso) &&
-  datos.paso > 0 &&
-  receta &&
-  datos.paso < receta.pasos.length
-) {
+            typeof datos?.paso === 'number' &&
+            Number.isInteger(datos.paso) &&
+            datos.paso > 0 &&
+            receta &&
+            datos.paso < receta.pasos.length
+          ) {
 
-  setPasoActual(
-    datos.paso
-  );
+            setPasoActual(
+              datos.paso
+            );
 
-  setMostrarContinuar(
-    true
-  );
+            setMostrarContinuar(
+              true
+            );
 
-}
+          }
 
         } catch {
 
@@ -183,10 +184,10 @@ export default function CookingScreen() {
 
     cargarProgreso();
 
- }, [
-  id,
-  receta,
-]);
+  }, [
+    id,
+    receta,
+  ]);
 
 
   // ====================================================
@@ -195,14 +196,14 @@ export default function CookingScreen() {
 
   useEffect(() => {
 
-  scrollRef
-    .current
-    ?.scrollTo({
-      y: 0,
-      animated: true,
-    });
+    scrollRef
+      .current
+      ?.scrollTo({
+        y: 0,
+        animated: true,
+      });
 
-}, [pasoActual]);
+  }, [pasoActual]);
 
 
   // ====================================================
@@ -235,32 +236,33 @@ export default function CookingScreen() {
   // ====================================================
   // ❌ NO ENCONTRADA
   // ====================================================
-const confirmarSalida = () => {
+  const confirmarSalida = () => {
 
-  if (
-    pasoActual === 0 &&
-    !mostrarContinuar
-  ) {
-    router.back();
-    return;
-  }
+    if (
+      pasoActual === 0 &&
+      !mostrarContinuar
+    ) {
+      router.back();
+      return;
+    }
 
-  Alert.alert(
-    '¿Salir de la preparación?',
-    'Tu progreso está guardado y podrás continuar después.',
-    [
-      {
-        text: 'Seguir cocinando',
-        style: 'cancel',
-      },
-      {
-        text: 'Salir',
-        onPress: () =>
-          router.back(),
-      },
-    ]
-  );
-};
+    Alert.alert(
+      '¿Salir de la preparación?',
+      'Tu progreso está guardado y podrás continuar después.',
+      [
+        {
+          text: 'Seguir cocinando',
+          style: 'cancel',
+        },
+        {
+          text: 'Salir',
+          onPress: () =>
+            router.back(),
+        },
+      ]
+    );
+  };
+
   if (!receta) {
 
     return (
@@ -476,7 +478,7 @@ const confirmarSalida = () => {
 
 
             <SuccessItem
-             icon="flower-outline"
+              icon="flower-outline"
               label="Aroma"
               value={
                 receta
@@ -584,7 +586,7 @@ const confirmarSalida = () => {
 
             style={styles.backButton}
 
-          onPress={confirmarSalida}
+            onPress={confirmarSalida}
 
           >
 
@@ -1059,29 +1061,29 @@ const confirmarSalida = () => {
           }
 
 
-         onPrev={() => {
+          onPrev={() => {
 
-  const anterior =
-    Math.max(
-      0,
-      pasoActual - 1
-    );
+            const anterior =
+              Math.max(
+                0,
+                pasoActual - 1
+              );
 
-  setMostrarRespuesta(
-    false
-  );
+            setMostrarRespuesta(
+              false
+            );
 
-  setPasoActual(
-    anterior
-  );
+            setPasoActual(
+              anterior
+            );
 
-  guardarProgreso(
-    anterior
-  );
+            guardarProgreso(
+              anterior
+            );
 
-  subirPantalla();
+            subirPantalla();
 
-}}
+          }}
 
 
           onNext={
@@ -1094,9 +1096,10 @@ const confirmarSalida = () => {
                     `cocina_${id}`
                   );
 
-
+                // 👇 AQUÍ SE PASA EL COSTO PARA DESCONTAR EL PRESUPUESTO
                 prepararReceta(
-                  receta.id
+                  receta.id,
+                  Number(costo) || 0
                 );
 
 
