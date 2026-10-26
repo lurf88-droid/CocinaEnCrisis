@@ -327,7 +327,21 @@ import { ENSALADA_HUERTA } from './recetas/ensaladas/ensalada-huerta';
 import { ENSALADA_CESAR } from './recetas/ensaladas/ensalada-cesar';
 import { ENSALADA_ATUN_ELOTE } from './recetas/ensaladas/ensalada-atun-elote';
 import { ENSALADA_BETABEL_NUEZ } from './recetas/ensaladas/ensalada-betabel-nuez';
-
+import { ENSALADA_POLLO_AGUACATE } from './recetas/ensaladas/ensalada-pollo-aguacate';
+import { ENSALADA_RUSA } from './recetas/ensaladas/ensalada-rusa';
+import { ENSALADA_ESPINACA_FRESA } from './recetas/ensaladas/ensalada-espinaca-fresa';
+import { ENSALADA_CODITOS } from './recetas/ensaladas/ensalada-coditos';
+import { ENSALADA_GARBANZOS } from './recetas/ensaladas/ensalada-garbanzos';
+import { ENSALADA_MANZANA } from './recetas/ensaladas/ensalada-manzana';
+import { ENSALADA_NOPALES } from './recetas/ensaladas/ensalada-nopales';
+import { ENSALADA_ELOTE_CALABACITA } from './recetas/ensaladas/ensalada-elote-calabacita';
+import { ENSALADA_LENTEJAS } from './recetas/ensaladas/ensalada-lentejas';
+import { ENSALADA_CAMARON } from './recetas/ensaladas/ensalada-camaron';
+import { ENSALADA_PERA_NUEZ } from './recetas/ensaladas/ensalada-pera-nuez';
+import { ENSALADA_BISTEC } from './recetas/ensaladas/ensalada-bistec';
+import { ENSALADA_POLLO_PARRILLA } from './recetas/ensaladas/ensalada-pollo-parrilla';
+import { ENSALADA_PAPA_HUEVO } from './recetas/ensaladas/ensalada-papa-huevo';
+import { AGUACATE_RELLENO_ATUN } from './recetas/ensaladas/aguacate-relleno-atun';
 //POSTRES//
 import { PLATANOS_FRITOS_CREMA } from './recetas/postres/platanos-fritos-crema';
 // ======================================================
@@ -471,7 +485,25 @@ ENSALADA_HUERTA,
 ENSALADA_ATUN_ELOTE,
 ENSALADA_BETABEL_NUEZ,
 ENSALADA_CESAR,
+ ENSALADA_POLLO_AGUACATE,
+  ENSALADA_RUSA,
+  ENSALADA_ESPINACA_FRESA,
+ ENSALADA_CODITOS,
+  ENSALADA_GARBANZOS,
+  ENSALADA_MANZANA,
+   ENSALADA_NOPALES,
+  ENSALADA_ELOTE_CALABACITA,
+  ENSALADA_LENTEJAS,
+ ENSALADA_CAMARON,
+  ENSALADA_PERA_NUEZ,
+  ENSALADA_BISTEC,
+  ENSALADA_POLLO_PARRILLA,
+  ENSALADA_PAPA_HUEVO,
+  AGUACATE_RELLENO_ATUN,
+
+
 //POSTRES//
+
 PLATANOS_FRITOS_CREMA,
 ];
 
