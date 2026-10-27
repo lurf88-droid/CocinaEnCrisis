@@ -306,13 +306,43 @@ import {
   QUICHE_LORRAINE,
 } from './recetas/quiche-lorraine';
 
-// BEBIDAS//
+//AGUAS//
 import { AGUA_LIMON_CHIA } from './recetas/bebidas/aguas/agua-limon-chia';
 import { AGUA_HORCHATA } from './recetas/bebidas/aguas/agua-horchata';
+import { AGUA_JAMAICA } from './recetas/bebidas/aguas/agua-jamaica';
+import { AGUA_TAMARINDO } from './recetas/bebidas/aguas/agua-tamarindo';
+import { AGUA_SANDIA } from './recetas/bebidas/aguas/agua-sandia';
+import { AGUA_MELON } from './recetas/bebidas/aguas/agua-melon';
+import { AGUA_PEPINO_LIMON } from './recetas/bebidas/aguas/agua-pepino-limon';
+import { AGUA_FRESA } from './recetas/bebidas/aguas/agua-fresa';
+import { AGUA_PINA } from './recetas/bebidas/aguas/agua-pina';
+import { AGUA_GUAYABA_LIMON } from './recetas/bebidas/aguas/agua-guayaba-limon';
+import { AGUA_MANGO_CHILE } from './recetas/bebidas/aguas/agua-mango-chile';
+import { AGUA_JENGIBRE_MENTA } from './recetas/bebidas/aguas/agua-jengibre-menta';
+import { AGUA_COCO_LIMON } from './recetas/bebidas/aguas/agua-coco-limon';
+import { AGUA_JAMAICA_JENGIBRE } from './recetas/bebidas/aguas/agua-jamaica-jengibre';
+import { AGUA_MARACUYA } from './recetas/bebidas/aguas/agua-maracuya';
+import { LIMONADA_COCO } from './recetas/bebidas/aguas/limonada-coco';
+import { AGUA_TUNA_ROJA } from './recetas/bebidas/aguas/agua-tuna-roja';
+import { LIMONADA_LAVANDA } from './recetas/bebidas/aguas/limonada-lavanda';
+import { TE_HELADO_FRUTOS_ROJOS } from './recetas/bebidas/aguas/te-helado-frutos-rojos';
+import { AGUA_CHIA_MANGO_COCO } from './recetas/bebidas/aguas/agua-chia-mango-coco';
+import { AGUA_TAMARINDO_CHIPOTLE } from './recetas/bebidas/aguas/agua-tamarindo-chipotle';
+import { AGUA_CAJETA } from './recetas/bebidas/aguas/agua-cajeta';
+import { HORCHATA_FRESA } from './recetas/bebidas/aguas/horchata-fresa';
+import { AGUA_FRUTAS } from './recetas/bebidas/aguas/agua-frutas';
+import { AGUA_LIMON_PEPINO_CHIA } from './recetas/bebidas/aguas/agua-limon-pepino-chia';
+import { AGUA_MANGO_MARACUYA } from './recetas/bebidas/aguas/agua-mango-maracuya';
 //LICUADOS//
 import {
   LICUADO_PLATANO,
-} from './recetas/desayunos_mexicanos/bebidas/licuados/licuado-platano';
+} from './recetas/bebidas/licuados/licuado-platano';
+import { LICUADO_AVENA_PLATANO } from './recetas/bebidas/licuados/licuado-avena-platano';
+
+
+//CAFES//
+import { CAFE_DE_OLLA } from './recetas/bebidas/cafes/cafe-de-olla';
+
 
 //SNACKS//
 import { GUACAMOLE_TRADICIONAL } from './recetas/snacks/guacamole-tradicional';
@@ -471,10 +501,40 @@ export const RECETAS: Receta[] = [
   LASAGNA_CASERA,
   CREMA_CHAMPINONES,
   QUICHE_LORRAINE,
-// BEBIDAS//
+//AGUAS//
 AGUA_LIMON_CHIA,
 AGUA_HORCHATA,
+  AGUA_JAMAICA,
+   AGUA_TAMARINDO,
+  AGUA_SANDIA,
+  AGUA_MELON,
+  AGUA_PEPINO_LIMON,
+  AGUA_FRESA,
+  AGUA_PINA,
+ AGUA_GUAYABA_LIMON,
+  AGUA_MANGO_CHILE,
+  AGUA_JENGIBRE_MENTA,
+  AGUA_COCO_LIMON,
+  AGUA_JAMAICA_JENGIBRE,
+  AGUA_MARACUYA,
+   LIMONADA_COCO,
+  AGUA_TUNA_ROJA,
+  LIMONADA_LAVANDA,
+  TE_HELADO_FRUTOS_ROJOS,
+  AGUA_CHIA_MANGO_COCO,
+  AGUA_TAMARINDO_CHIPOTLE,
+    AGUA_CAJETA,
+  HORCHATA_FRESA,
+  AGUA_FRUTAS,
+  AGUA_LIMON_PEPINO_CHIA,
+  AGUA_MANGO_MARACUYA,
 
+
+//LICUADOS//
+  LICUADO_AVENA_PLATANO,
+LICUADO_PLATANO,
+  //CAFES//
+   CAFE_DE_OLLA,
 //snacks//
 GUACAMOLE_TRADICIONAL,
 //VEGETARIANO//

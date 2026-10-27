@@ -1,0 +1,60 @@
+import type { Receta } from '@/types/receta';
+
+export const AGUA_TAMARINDO: Receta = {
+  id: 'agua-tamarindo',
+  titulo: 'Agua fresca de tamarindo',
+  imagen: require('../../../../assets/images/recetas/bebidas/aguas/agua-tamarindo.webp'),
+  descripcion: 'Dulce, ácida y llena de sabor. Aprende el arte de extraer la pulpa del tamarindo sin que la bebida sepa a semilla, logrando un balance perfecto entre dulce y ácido.',
+  cocina: 'mexicana',
+  tecnicaPrincipal: 'extracción de pulpa por ebullición',
+  categoria: 'bebida',
+  rolCulinario: 'bebida',
+  porciones: 4,
+  tiempoMinutos: 20,
+  dificultad: 'media',
+  nivelChef: 2,
+  aprendizajes: ['extracción de pulpa', 'equilibrio ácido-dulce', 'colado fino'],
+  ingredientes: [
+    { id: 'tamarindo', cantidad: 0.200, unidad: 'kg' },
+    { id: 'azucar', cantidad: 0.100, unidad: 'kg' },
+    { id: 'agua', cantidad: 1.500, unidad: 'litro' },
+  ],
+  pasos: [
+    {
+      numero: 1,
+      titulo: 'Hierve el tamarindo',
+      descripcion: 'Pon el tamarindo en una olla con 1 litro de agua. Hierve a fuego medio por 10 minutos para ablandar la cáscara.',
+      tiempo: '10 minutos',
+      consejo: 'El calor es el truco para que la pulpa se separe fácilmente de la semilla.',
+      porQue: 'La ebullición hidrata la fibra del tamarindo y permite liberar la pulpa.',
+      nivelImportancia: 'critico',
+    },
+    {
+      numero: 2,
+      titulo: 'Machaca y cuela',
+      descripcion: 'Retira del fuego y deja templar. Con una cuchara o tus manos limpias, machaca el tamarindo en el agua. Cuela con un colador muy fino, presionando con una cuchara para sacar toda la pulpa.',
+      tiempo: '5 minutos',
+      mensajeChef: 'Las semillas no deben pasar al agua, solo la pulpa.',
+      señalCorrecta: 'La pulpa está separada de la semilla.',
+    },
+    {
+      numero: 3,
+      titulo: 'Endulza y sirve',
+      descripcion: 'Agrega el azúcar y el medio litro de agua fría restante. Mezcla bien y ajusta el azúcar al gusto.',
+      tiempo: '3 minutos',
+      chefPregunta: '¿Por qué el tamarindo es tan ácido?',
+      respuestaEsperada: 'Porque contiene ácidos orgánicos naturales (ácido tartárico) que le dan ese sabor.',
+    }
+  ],
+  tip: 'Si te gusta más ácido, agrega el jugo de medio limón.',
+  ahorro: 'El tamarindo seco es muy económico y rinde muchísimo.',
+  errorComun: 'No colarlo bien y sentir arenilla de semilla.',
+  popularidad: 90,
+  tags: ['bebida', 'tradicional', 'mexicana', 'economica'],
+  tipoComida: 'barata',
+  historiaChef: 'El tamarindo es originario de África y Asia, pero en México se convirtió en el sabor favorito de las paletas y aguas frescas.',
+  chefInicio: 'Hoy vamos a dominar el tamarindo. El secreto está en no masticar la semilla.',
+  chefFinal: '¡Excelente! Tienes un agua fresca con el balance ácido-dulce perfecto.',
+  señalesExito: { vista: 'Color marrón claro opaco.', olor: 'Aroma dulce y ácido.', textura: 'Líquida sin sedimento.' },
+  rescates: [{ problema: 'Quedó muy ácida', solucion: 'Agrega más azúcar o un toque de bicarbonato.' }]
+};

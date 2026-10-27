@@ -1,0 +1,62 @@
+import type { Receta } from '@/types/receta';
+
+export const AGUA_CHIA_MANGO_COCO: Receta = {
+  id: 'agua-chia-mango-coco',
+  titulo: 'Agua de chía con mango y coco',
+ imagen: require('../../../../assets/images/recetas/bebidas/aguas/agua-chia-mango-coco.webp'),
+  descripcion: 'Una bomba tropical con textura única. El mango, el coco y la chía crean una bebida que te llena y te refresca, perfecta para días de calor intenso.',
+  cocina: 'tropical',
+  tecnicaPrincipal: 'hidratación de chía y mezcla de pulpas',
+  categoria: 'bebida',
+  rolCulinario: 'bebida',
+  porciones: 4,
+  tiempoMinutos: 15,
+  dificultad: 'facil',
+  nivelChef: 2,
+  aprendizajes: ['hidratación de chía', 'balance de texturas', 'bebidas saciantes'],
+  ingredientes: [
+    { id: 'chia', cantidad: 0.040, unidad: 'kg' },
+    { id: 'mango', cantidad: 0.400, unidad: 'kg' },
+    { id: 'leche_coco', cantidad: 0.300, unidad: 'litro' },
+    { id: 'agua', cantidad: 0.700, unidad: 'litro' },
+    { id: 'azucar', cantidad: 0.030, unidad: 'kg' },
+    { id: 'limon', cantidad: 1, unidad: 'pieza' },
+  ],
+  pasos: [
+    {
+      numero: 1,
+      titulo: 'Hidrata la chía',
+      descripcion: 'En un tazón, mezcla la chía con 0.3 litros de agua. Déjala reposar 10 minutos, moviendo una vez a la mitad para evitar grumos.',
+      tiempo: '10 minutos',
+      porQue: 'La chía absorbe hasta 10 veces su peso en agua, creando una textura gelatinosa única.',
+      mensajeChef: 'La chía es una esponja natural que atrapa todos los sabores.',
+      nivelImportancia: 'critico',
+    },
+    {
+      numero: 2,
+      titulo: 'Licúa el mango',
+      descripcion: 'Pela el mango y licúalo con la leche de coco y el agua restante.',
+      tiempo: '3 minutos',
+      consejo: 'Si el mango es fibroso, cuela la mezcla para una textura más fina.',
+    },
+    {
+      numero: 3,
+      titulo: 'Mezcla todo',
+      descripcion: 'Agrega la chía hidratada, el azúcar y el jugo de limón a la mezcla de mango. Revuelve bien y sirve.',
+      tiempo: '2 minutos',
+      chefPregunta: '¿Por qué la chía es tan popular en las bebidas?',
+      respuestaEsperada: 'Porque tiene fibra, proteína y omega-3, además de dar una textura agradable a las bebidas.',
+    }
+  ],
+  tip: 'Sirve con trozos de mango fresco por encima para darle un extra visual.',
+  ahorro: 'La chía es un ingrediente que rinde muchísimo y es muy económico.',
+  errorComun: 'No hidratar la chía antes de mezclar; la bebida quedará con semillas duras.',
+  popularidad: 90,
+  tags: ['bebida', 'chia', 'mango', 'coco', 'tropical', 'saludable'],
+  tipoComida: 'barata',
+  historiaChef: 'La chía fue un alimento sagrado para los aztecas y mayas. Hoy es un superalimento mundial y la base de las bebidas más saludables.',
+  chefInicio: 'Hoy vamos a crear una bebida que te llena y te refresca. La chía es la estrella.',
+  chefFinal: '¡Listo! Tienes una bebida tropical, llena de nutrientes y con textura única.',
+  señalesExito: { vista: 'Líquido naranja cremoso con bolitas de chía.', olor: 'Aroma dulce a mango y coco.', textura: 'Ligeramente gelatinosa por la chía.' },
+  rescates: [{ problema: 'Quedó muy espesa', solucion: 'Agrega más agua o leche de coco para aflojarla.' }]
+};

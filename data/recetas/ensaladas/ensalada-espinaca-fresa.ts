@@ -3,7 +3,7 @@ import type { Receta } from '@/types/receta';
 export const ENSALADA_ESPINACA_FRESA: Receta = {
   id: 'ensalada-espinaca-fresa',
   titulo: 'Ensalada de espinaca y fresa',
- imagen: require('../../../assets/images/recetas/ensaladas/ensalada-espinaca-fresa'), 
+ imagen: require('../../../assets/images/recetas/ensaladas/ensalada-espinaca-fresa.webp'), 
   descripcion: 'Una combinación elegante que parece sacada de un restaurante de lujo. El dulzor de la fresa, la acidez del limón y la textura de la nuez crean un balance perfecto.',
   
   cocina: 'internacional',

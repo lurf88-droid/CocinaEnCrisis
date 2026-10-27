@@ -1,0 +1,60 @@
+import type { Receta } from '@/types/receta';
+
+export const AGUA_PINA: Receta = {
+  id: 'agua-pina',
+  titulo: 'Agua fresca de piña con cáscara',
+  imagen: require('../../../../assets/images/recetas/bebidas/aguas/agua-piña.webp'),
+  descripcion: 'Cero desperdicio y sabor intenso. Aprende a usar la cáscara de la piña para hervirla y extraer un sabor dulce que combina perfecto con canela.',
+  cocina: 'mexicana',
+  tecnicaPrincipal: 'hervido de cáscaras y extracción de azúcares',
+  categoria: 'bebida',
+  rolCulinario: 'bebida',
+  porciones: 4,
+  tiempoMinutos: 25,
+  dificultad: 'facil',
+  nivelChef: 2,
+  aprendizajes: ['aprovechamiento de cáscaras', 'infusión con especias', 'control de dulzor'],
+  ingredientes: [
+   { id: 'pina', cantidad: 1, unidad: 'kg' },
+    { id: 'agua', cantidad: 1.500, unidad: 'litro' },
+    { id: 'azucar', cantidad: 0.100, unidad: 'kg' },
+    { id: 'canela', cantidad: 0.010, unidad: 'kg' },
+  ],
+  pasos: [
+    {
+      numero: 1,
+      titulo: 'Separa la cáscara',
+      descripcion: 'Pela la piña y separa la cáscara. La pulpa la puedes guardar para un licuado o postre.',
+      tiempo: '5 minutos',
+      consejo: 'Lava muy bien la piña antes de pelarla, asegurándote de que no quede tierra en la cáscara.',
+    },
+    {
+      numero: 2,
+      titulo: 'Hierve la cáscara',
+      descripcion: 'En una olla, pon la cáscara de piña con 1 litro de agua y la canela. Hierve a fuego medio por 15 minutos. El agua tomará un color amarillo y un aroma dulce.',
+      tiempo: '15 minutos',
+      porQue: 'Las cáscaras de piña contienen muchísimos azúcares naturales y aromas que se liberan con el calor.',
+      mensajeChef: 'El cero desperdicio es una de las mejores técnicas de cocina.',
+      nivelImportancia: 'critico',
+    },
+    {
+      numero: 3,
+      titulo: 'Cuela, endulza y enfría',
+      descripcion: 'Cuela el caldo de piña. Agrega el azúcar y el medio litro de agua fría restante. Sirve bien helada.',
+      tiempo: '3 minutos',
+      chefPregunta: '¿Por qué es mejor hervir la cáscara que licuarla?',
+      respuestaEsperada: 'Porque la cáscara es fibrosa y no se puede licuar bien; al hervirla, extraes el sabor sin la textura dura.',
+    }
+  ],
+  tip: 'Si tienes hojas de menta, puedes hervirlas junto con la cáscara para darle un toque más fresco.',
+  ahorro: 'Literalmente estás haciendo una bebida con lo que normalmente se tira a la basura.',
+  errorComun: 'No lavar bien la piña y que el agua sepa a tierra.',
+  popularidad: 88,
+  tags: ['bebida', 'pina', 'cero desperdicio', 'economica', 'tradicional'],
+  tipoComida: 'barata',
+  historiaChef: 'En tiempos de escasez, los mexicanos aprendieron a usar todas las partes de la fruta. Esta técnica de hervir cáscaras es un ejemplo clásico de la cocina de aprovechamiento.',
+  chefInicio: 'Hoy vamos a hacer magia con las cáscaras de piña. El desperdicio no existe en la cocina de Chef Luna.',
+  chefFinal: '¡Impresionante! Tienes un agua fresca con sabor a piña asada, sin haber usado la pulpa.',
+  señalesExito: { vista: 'Color amarillo pálido.', olor: 'Aroma dulce a piña y canela.', textura: 'Líquida y refrescante.' },
+  rescates: [{ problema: 'Sabe muy simple', solucion: 'Agrega un poco más de azúcar y un chorrito de limón para despertar los sabores.' }]
+};

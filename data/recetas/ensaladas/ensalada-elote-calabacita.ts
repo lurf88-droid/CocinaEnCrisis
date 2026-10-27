@@ -3,7 +3,7 @@ import type { Receta } from '@/types/receta';
 export const ENSALADA_ELOTE_CALABACITA: Receta = {
   id: 'ensalada-elote-calabacita',
   titulo: 'Ensalada caliente de elote y calabacita',
-  imagen: require('../../../assets/images/recetas/ensaladas/ensalada-elote-calabacita'), 
+  imagen: require('../../../assets/images/recetas/ensaladas/ensalada-elote-calabacita.webp'), 
   descripcion: 'Una ensalada diferente, servida caliente. El dulzor del elote se mezcla con la frescura de la calabacita y un toque de limón que despierta todos los sentidos.',
   
   cocina: 'mexicana',

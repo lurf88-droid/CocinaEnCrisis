@@ -34,6 +34,22 @@ export const VINOS: IngredienteCatalogo[] = [
     },
     conservacion: 'ambiente',
   },
+   {
+    id: 'agua_de_coco',
+    nombre: 'Agua de coco',
+    aliases: ['coconut water'],
+    precioUnitario: 25, unidad: 'litro',
+    categoria: 'bebidas', subcategoria: 'naturales', basico: false,
+    tags: ['hidratante', 'tropical'],
+    cocinas: ['tropical'],
+    tecnicas: ['mezclar'],
+    nivel: 'basico',
+    familias: ['bebidas'],
+    usos: ['bebidas', 'cocteles'],
+    roles: ['base'],
+    combinaCon: ['limon', 'pina'],
+    perfilSabor: { ...SABOR_BASE, dulce: 6, acido: 1, salado: 0, amargo: 0, umami: 0, picante: 0, ahumado: 0, graso: 0, fresco: 10, aromatico: 4 },
+  },
 {
  id:'vino_tinto',
 

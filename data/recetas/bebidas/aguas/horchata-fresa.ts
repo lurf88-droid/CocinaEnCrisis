@@ -1,0 +1,61 @@
+import type { Receta } from '@/types/receta';
+
+export const HORCHATA_FRESA: Receta = {
+  id: 'horchata-fresa',
+  titulo: 'Horchata de fresa',
+  imagen: require('../../../../assets/images/recetas/bebidas/aguas/agua-horchata-fresa.webp'),
+  descripcion: 'La fusión perfecta entre la cremosidad de la horchata tradicional y la frescura ácida de la fresa. Una bebida de color rosa pastel que es puro placer.',
+  cocina: 'mexicana',
+  tecnicaPrincipal: 'extracción de almidón de arroz y puré de fresa',
+  categoria: 'bebida',
+  rolCulinario: 'bebida',
+  porciones: 4,
+  tiempoMinutos: 20,
+  dificultad: 'media',
+  nivelChef: 2,
+  aprendizajes: ['fusión de bebidas tradicionales', 'control de acidez en lácteos', 'licuado y colado'],
+  ingredientes: [
+    { id: 'arroz', cantidad: 0.100, unidad: 'kg' },
+    { id: 'leche', cantidad: 0.500, unidad: 'litro' },
+    { id: 'fresa', cantidad: 0.300, unidad: 'kg' },
+    { id: 'azucar', cantidad: 0.060, unidad: 'kg' },
+    { id: 'canela', cantidad: 0.005, unidad: 'kg' },
+    { id: 'agua', cantidad: 0.500, unidad: 'litro' },
+  ],
+  pasos: [
+    {
+      numero: 1,
+      titulo: 'Prepara la base de horchata',
+      descripcion: 'Remoja el arroz con la canela en agua caliente por 2 horas. Licúa con la leche y cuela muy bien.',
+      tiempo: '15 minutos (activo)',
+      porQue: 'El arroz aporta la textura cremosa característica de la horchata.',
+      nivelImportancia: 'critico',
+    },
+    {
+      numero: 2,
+      titulo: 'Haz el puré de fresa',
+      descripcion: 'Lava y desinfecta las fresas. Licúalas solas hasta obtener un puré espeso.',
+      tiempo: '3 minutos',
+      consejo: 'Si no quieres las semillas, puedes colar el puré de fresa.',
+    },
+    {
+      numero: 3,
+      titulo: 'La fusión',
+      descripcion: 'En una jarra, mezcla la horchata, el puré de fresa, el azúcar y el agua restante. Sirve bien frío.',
+      tiempo: '2 minutos',
+      chefPregunta: '¿Por qué la horchata de fresa es rosa y no roja?',
+      respuestaEsperada: 'Porque la leche y el arroz son blancos y diluyen el pigmento rojo de la fresa.',
+    }
+  ],
+  tip: 'No agregues limón, el ácido cortaría la leche y se vería feo.',
+  ahorro: 'Aprovecha las fresas maduras que están más baratas.',
+  errorComun: 'No colar bien el arroz y sentir arenilla en la bebida.',
+  popularidad: 92,
+  tags: ['bebida', 'horchata', 'fresa', 'fusion', 'mexicana'],
+  tipoComida: 'familia',
+  historiaChef: 'La horchata de fresa es una bebida muy popular en las aguas frescas de México, especialmente en los puestos de jugos y licuados, donde se le conoce como "horchata rosa".',
+  chefInicio: 'Hoy vamos a unir dos leyendas: la horchata y la fresa. El resultado es una bebida rosa espectacular.',
+  chefFinal: '¡Perfecto! Tienes una bebida cremosa con un toque frutal.',
+  señalesExito: { vista: 'Color rosa pálido cremoso.', olor: 'Aroma a fresa y canela.', textura: 'Cremosa y ligeramente espesa.' },
+  rescates: [{ problema: 'Quedó muy dulce', solucion: 'Agrega más leche o agua para balancear.' }]
+};

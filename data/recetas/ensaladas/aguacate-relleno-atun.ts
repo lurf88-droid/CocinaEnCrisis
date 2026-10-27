@@ -3,7 +3,7 @@ import type { Receta } from '@/types/receta';
 export const AGUACATE_RELLENO_ATUN: Receta = {
   id: 'aguacate-relleno-atun',
   titulo: 'Aguacate relleno de atún',
- imagen: require('../../../assets/images/recetas/ensaladas/aguacate-relleno-atun'), 
+ imagen: require('../../../assets/images/recetas/ensaladas/aguacate-relleno-atun.webp'), 
   descripcion: 'Una presentación elegante y rapidísima. Aprende a usar el aguacate como un tazón natural y a hacer una mezcla de atún fresca que no sepa a "lata".',
   
   cocina: 'internacional',

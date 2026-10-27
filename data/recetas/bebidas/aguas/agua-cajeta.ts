@@ -1,0 +1,61 @@
+import type { Receta } from '@/types/receta';
+
+export const AGUA_CAJETA: Receta = {
+  id: 'agua-cajeta',
+  titulo: 'Agua fresca de cajeta',
+  imagen: require('../../../../assets/images/recetas/bebidas/aguas/agua-cajeta.webp'),
+  descripcion: 'Una bebida de otro nivel. El sabor intenso de la cajeta se mezcla con leche fría y un toque de canela, creando una experiencia cremosa que parece un postre líquido.',
+  cocina: 'mexicana',
+  tecnicaPrincipal: 'dilución de caramelo y emulsión en frío',
+  categoria: 'bebida',
+  rolCulinario: 'bebida',
+  porciones: 4,
+  tiempoMinutos: 10,
+  dificultad: 'facil',
+  nivelChef: 2,
+  aprendizajes: ['disolución de caramelos en lácteos', 'balance de dulzor', 'bebidas tipo postre'],
+  ingredientes: [
+    { id: 'cajeta', cantidad: 0.150, unidad: 'kg' },
+    { id: 'leche', cantidad: 0.500, unidad: 'litro' },
+    { id: 'agua', cantidad: 0.500, unidad: 'litro' },
+    { id: 'canela', cantidad: 0.005, unidad: 'kg' },
+  ],
+  pasos: [
+    {
+      numero: 1,
+      titulo: 'Disuelve la cajeta',
+      descripcion: 'En una olla pequeña, calienta un poco de la leche (sin hervir) y agrega la cajeta. Mueve constantemente hasta que se disuelva por completo y formes una crema líquida.',
+      tiempo: '4 minutos',
+      consejo: 'No dejes que la leche hierva, solo debe estar tibia para derretir la cajeta sin que se corte.',
+      porQue: 'La cajeta es densa; disolverla en un poco de leche tibia evita que se vaya al fondo de la jarra.',
+      nivelImportancia: 'critico',
+    },
+    {
+      numero: 2,
+      titulo: 'Mezcla y enfría',
+      descripcion: 'En una jarra, agrega la leche restante, el agua y el hielo. Vierte la mezcla de cajeta y revuelve bien.',
+      tiempo: '3 minutos',
+      mensajeChef: 'El resultado debe ser un color café claro y un aroma irresistible a caramelo.',
+    },
+    {
+      numero: 3,
+      titulo: 'Sirve y decora',
+      descripcion: 'Sirve en vasos y espolvorea una pizca de canela molida por encima.',
+      tiempo: '2 minutos',
+      chefPregunta: '¿De qué está hecha la cajeta?',
+      respuestaEsperada: 'De leche de cabra (o vaca) y azúcar caramelizada.',
+      señalCorrecta: 'Bebida color café claro, cremosa y homogénea.',
+    }
+  ],
+  tip: 'Si quieres una versión más espesa tipo malteada, licúa la mezcla con hielo.',
+  ahorro: 'Rinde muchísimo y es un postre-bebida muy económico.',
+  errorComun: 'Echar la cajeta fría directo al agua; se hará un grumo pegajoso en el fondo.',
+  popularidad: 88,
+  tags: ['bebida', 'cajeta', 'dulce', 'mexicana', 'postre'],
+  tipoComida: 'barata',
+  historiaChef: 'La cajeta es originaria de Celaya, Guanajuato. Esta bebida es una adaptación moderna de los famosos "vasos de leche con cajeta" de los mercados mexicanos.',
+  chefInicio: 'Hoy vamos a hacer un postre en vaso. La cajeta es el ingrediente estrella.',
+  chefFinal: '¡Listo! Tienes una bebida dulce y cremosa que te va a enamorar.',
+  señalesExito: { vista: 'Color café claro uniforme.', olor: 'Aroma a caramelo y canela.', textura: 'Líquida con un toque cremoso.' },
+  rescates: [{ problema: 'Se quedaron grumos de cajeta', solucion: 'Licúa la bebida por 10 segundos para integrar todo.' }]
+};

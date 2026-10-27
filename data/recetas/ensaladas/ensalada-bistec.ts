@@ -3,7 +3,7 @@ import type { Receta } from '@/types/receta';
 export const ENSALADA_BISTEC: Receta = {
   id: 'ensalada-bistec',
   titulo: 'Ensalada de bistec a la parrilla',
- imagen: require('../../../assets/images/recetas/ensaladas/ensalada-bistec'), 
+ imagen: require('../../../assets/images/recetas/ensaladas/ensalada-bistec.webp'), 
   descripcion: 'Una ensalada contundente para los amantes de la carne. Aprende a cocinar el bistec en su punto exacto y a cortarlo en contra del grano para que quede súper suave.',
   
   cocina: 'internacional',

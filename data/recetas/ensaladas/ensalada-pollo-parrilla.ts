@@ -3,7 +3,7 @@ import type { Receta } from '@/types/receta';
 export const ENSALADA_POLLO_PARRILLA: Receta = {
   id: 'ensalada-pollo-parrilla',
   titulo: 'Ensalada de pollo a la parrilla con mostaza y miel',
- imagen: require('../../../assets/images/recetas/ensaladas/ensalada-pollo-parrilla'), 
+ imagen: require('../../../assets/images/recetas/ensaladas/ensalada-pollo-parrilla.webp'), 
   descripcion: 'Una ensalada premium con un aderezo agridulce que te va a volar la cabeza. Aprende a sellar la pechuga de pollo para que quede jugosa y a emulsionar una vinagreta espesa.',
   
   cocina: 'internacional',

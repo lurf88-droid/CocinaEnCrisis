@@ -3,7 +3,7 @@ import type { Receta } from '@/types/receta';
 export const ENSALADA_CAMARON: Receta = {
   id: 'ensalada-camaron',
   titulo: 'Ensalada Premium de camarón al ajillo',
-  imagen: require('../../../assets/images/recetas/ensaladas/ensalada-camaron'), 
+  imagen: require('../../../assets/images/recetas/ensaladas/ensalada-camaron.webp'), 
   descripcion: 'Elegancia en un plato. El camarón sellado en mantequilla y ajo se combina con la frescura de las hojas verdes. Una ensalada que te enseña el control exacto de la temperatura para no sobrecocer el marisco.',
   
   cocina: 'mediterranea',
@@ -22,7 +22,7 @@ export const ENSALADA_CAMARON: Receta = {
   ],
 
   ingredientes: [
-    { id: 'camaron', cantidad: 0.250, unidad: 'kg' },
+    { id: 'camaron-mediano', cantidad: 0.250, unidad: 'kg' },
     { id: 'lechuga', cantidad: 0.200, unidad: 'kg' },
     { id: 'jitomate', cantidad: 1, unidad: 'pieza' },
     { id: 'aguacate', cantidad: 1, unidad: 'pieza' },

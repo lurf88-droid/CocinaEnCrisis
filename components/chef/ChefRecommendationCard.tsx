@@ -1,5 +1,5 @@
 import {
-  ImageBackground,
+  Image,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -134,44 +134,21 @@ const razonesChef =
       ================================================= */}
 
 
-      <ImageBackground
+      <View style={styles.hero}>
 
-        source={
-          receta.imagen
-        }
-
-        style={
-          styles.hero
-        }
-
-        imageStyle={
-          styles.heroImage
-        }
-
-        resizeMode="cover"
-
-      >
-
-
-        <View
-          style={
-            styles.overlay
-          }
+        <Image
+          source={receta.imagen}
+          style={[StyleSheet.absoluteFill, styles.heroImage]}
+          resizeMode="cover"
         />
 
-
-        <View
-          style={
-            styles.heroContent
-          }
-        >
+        <View style={styles.overlay} />
 
 
-          <View
-            style={
-              styles.kickerBadge
-            }
-          >
+        <View style={styles.heroContent}>
+
+
+          <View style={styles.kickerBadge}>
 
             <MaterialCommunityIcons
               name="chef-hat"
@@ -179,41 +156,23 @@ const razonesChef =
               color="#F2B35B"
             />
 
-            <AppText
-              style={
-                styles.kicker
-              }
-            >
+            <AppText style={styles.kicker}>
               CHEF LUNA ELIGIÓ ESTA
             </AppText>
 
           </View>
 
 
-          <View
-            style={
-              styles.heroBottom
-            }
-          >
+          <View style={styles.heroBottom}>
 
 
-            <AppText
-              style={
-                styles.title
-              }
-            >
+            <AppText style={styles.title}>
               {receta.titulo}
             </AppText>
 
 
-            <AppText
-              style={
-                styles.heroDescription
-              }
-            >
-              {
-                personalidadChef
-              }
+            <AppText style={styles.heroDescription}>
+              {personalidadChef}
             </AppText>
 
 
@@ -223,7 +182,7 @@ const razonesChef =
         </View>
 
 
-      </ImageBackground>
+      </View>
 
 
       {/* =================================================
@@ -790,6 +749,8 @@ const styles =
       justifyContent:
         'flex-end',
 
+      position: 'relative',
+
     },
 
 
@@ -807,6 +768,7 @@ const styles =
     overlay: {
 
       ...StyleSheet.absoluteFill,
+      
       backgroundColor:
         'rgba(15, 8, 5, 0.38)',
 

@@ -4,7 +4,7 @@ export const LICUADO_PLATANO : Receta = {
   id: 'licuado-platano',
   titulo: 'Licuado de plátano con leche',
 imagen: require(
-'../../../../../assets/images/recetas/desayunos_mexicanos/bebidas/licuados/licuado-platano.webp'
+'../../../../assets/images/recetas/bebidas/licuados/licuado-platano.webp'
 ),
   descripcion:
     'Desayuno dulce, rápido y económico. Ideal cuando no quieres cocinar y necesitas algo nutritivo en minutos.',

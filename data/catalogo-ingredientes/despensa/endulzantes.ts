@@ -6,7 +6,37 @@ export const ENDULZANTES: IngredienteCatalogo[] = [
   // ====================================================
   // 🍬 AZÚCAR BLANCA
   // ====================================================
-
+ {
+    id: 'cajeta',
+    nombre: 'Cajeta',
+    aliases: ['dulce de leche', 'cajeta quemada', 'cajeta de Celaya'],
+    precioUnitario: 60,
+    unidad: 'kg',
+    precio: { minimo: 40, promedio: 60, maximo: 90, moneda: 'MXN', actualizado: '2026-08' },
+    categoria: 'lacteos',
+    subcategoria: 'dulces',
+    basico: false,
+    tags: ['dulce', 'mexicano', 'reposteria'],
+    cocinas: ['mexicana'],
+    tecnicas: ['derretir', 'mezclar', 'untar'],
+    nivel: 'basico',
+    familias: ['lacteos', 'dulces'],
+    usos: ['postres', 'bebidas', 'panaderia'],
+    roles: ['sabor_principal', 'endulzante'],
+    combinaCon: ['leche', 'canela', 'nuez'],
+    sustitutos: ['mermelada', 'chocolate'],
+    sustitutosEconomicos: [],
+    perfilSabor: {
+      ...SABOR_BASE,
+      dulce: 10, acido: 0, salado: 1, amargo: 1, umami: 0, picante: 0,
+      ahumado: 2, graso: 7, fresco: 1, aromatico: 5,
+    },
+    sabores: ['dulce', 'caramelo'],
+    texturas: ['viscosa', 'cremosa'],
+    temporada: ['todo_el_año'],
+    conservacion: 'refrigerado',
+    recetasCompatibles: ['agua-cajeta', 'postre-cajeta'],
+  },
   {
     id: 'azucar_blanca',
 

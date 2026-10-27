@@ -3,7 +3,7 @@ import type { Receta } from '@/types/receta';
 export const ENSALADA_MANZANA: Receta = {
   id: 'ensalada-manzana',
   titulo: 'Ensalada de manzana y apio',
-  imagen: require('../../../assets/images/recetas/arroz-huevo.webp'), // 👈 Cambia la foto después
+  imagen: require('../../../assets/images/recetas/ensaladas/ensalada-manzana.webp'),
   descripcion: 'Dulce, crujiente y cremosa. Una ensalada navideña clásica que te enseña a cortar en juliana y a mezclar texturas contrastantes sin que se oxiden.',
   
   cocina: 'internacional',

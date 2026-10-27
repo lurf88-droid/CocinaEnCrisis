@@ -3,7 +3,7 @@ import type { Receta } from '@/types/receta';
 export const ENSALADA_PAPA_HUEVO: Receta = {
   id: 'ensalada-papa-huevo',
   titulo: 'Ensalada de papa y huevo',
-imagen: require('../../../assets/images/recetas/ensaladas/ensalada-papa-huevo'), 
+imagen: require('../../../assets/images/recetas/ensaladas/ensalada-papa-huevo.webp'), 
   descripcion: 'El clásico de los picnics y las comidas de campo. Aprende a cocinar la papa perfecta para ensalada y a hacer un aderezo cremoso que no se corte.',
   
   cocina: 'internacional',

@@ -3,7 +3,7 @@ import type { Receta } from '@/types/receta';
 export const ENSALADA_PERA_NUEZ: Receta = {
   id: 'ensalada-pera-nuez',
   titulo: 'Ensalada gourmet de pera y nuez',
-  imagen: require('../../../assets/images/recetas/ensaladas/ensalada-pera-nuez'), 
+  imagen: require('../../../assets/images/recetas/ensaladas/ensalada-pera-nuez.webp'), 
   descripcion: 'La combinación definitiva de dulce y salado. Una ensalada otoñal e increíblemente elegante, que enseña el arte de caramelizar frutas y hacer un aderezo con miel que no empalaga.',
   
   cocina: 'francesa',

@@ -1,11 +1,10 @@
 import type { IngredienteCatalogo } from '@/data/catalogo-ingredientes';
 import { SABOR_BASE } from '@/types/saborBase';
 
-export const FRUTOS_SECOS: IngredienteCatalogo[] = [
+export const reposteria: IngredienteCatalogo[] = [
 
 
-
-
+  
 {
 id:'cacahuate',
 

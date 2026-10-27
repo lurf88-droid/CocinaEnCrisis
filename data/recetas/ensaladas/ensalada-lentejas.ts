@@ -3,7 +3,7 @@ import type { Receta } from '@/types/receta';
 export const ENSALADA_LENTEJAS: Receta = {
   id: 'ensalada-lentejas',
   titulo: 'Ensalada tibia de lentejas',
-  imagen: require('../../../assets/images/recetas/ensaladas/ensalada-lentejas'), 
+  imagen: require('../../../assets/images/recetas/ensaladas/ensalada-lentejas.webp'), 
   descripcion: 'Una ensalada que alimenta de verdad. Las lentejas absorben el aderezo como esponjas, creando un plato lleno de proteína y sabor que se puede comer tibio o frío.',
   
   cocina: 'mediterranea',

@@ -3,7 +3,7 @@ import type { Receta } from '@/types/receta';
 export const ENSALADA_NOPALES: Receta = {
   id: 'ensalada-nopales',
   titulo: 'Ensalada de nopales tradicional',
-imagen: require('../../../assets/images/recetas/ensaladas/ensalada-nopales'), 
+imagen: require('../../../assets/images/recetas/ensaladas/ensalada-nopales.webp'), 
   descripcion: 'Un platillo prehispánico lleno de salud. Aprende la técnica fundamental para limpiar los nopales, quitarles la baba y lograr una textura firme y deliciosa.',
   
   cocina: 'mexicana',
@@ -22,7 +22,7 @@ imagen: require('../../../assets/images/recetas/ensaladas/ensalada-nopales'),
   ],
 
   ingredientes: [
-    { id: 'nopal', cantidad: 4, unidad: 'pieza' },
+   { id: 'nopal', cantidad: 0.400, unidad: 'kg' },
     { id: 'jitomate', cantidad: 2, unidad: 'pieza' },
     { id: 'cebolla_blanca', cantidad: 0.050, unidad: 'kg' },
     { id: 'cilantro', cantidad: 0.020, unidad: 'kg' },

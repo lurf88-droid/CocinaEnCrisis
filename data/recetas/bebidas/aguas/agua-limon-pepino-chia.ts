@@ -1,0 +1,60 @@
+import type { Receta } from '@/types/receta';
+
+export const AGUA_LIMON_PEPINO_CHIA: Receta = {
+  id: 'agua-limon-pepino-chia',
+  titulo: 'Agua de limón, pepino y chía',
+  imagen: require('../../../../assets/images/recetas/bebidas/aguas/agua-limon-pepino-chia.webp'),
+  descripcion: 'La bebida detox definitiva. Refrescante, ligeramente cítrica y con la textura única de la chía. Perfecta para hidratarte después del ejercicio.',
+  cocina: 'internacional',
+  tecnicaPrincipal: 'infusión en frío e hidratación de semillas',
+  categoria: 'bebida',
+  rolCulinario: 'bebida',
+  porciones: 4,
+  tiempoMinutos: 15,
+  dificultad: 'facil',
+  nivelChef: 1,
+  aprendizajes: ['hidratación de chía', 'infusión en frío', 'bebidas funcionales'],
+  ingredientes: [
+    { id: 'limon', cantidad: 3, unidad: 'pieza' },
+    { id: 'pepino', cantidad: 0.200, unidad: 'kg' },
+    { id: 'chia', cantidad: 0.030, unidad: 'kg' },
+    { id: 'miel', cantidad: 0.030, unidad: 'kg' },
+    { id: 'agua', cantidad: 1.500, unidad: 'litro' },
+  ],
+  pasos: [
+    {
+      numero: 1,
+      titulo: 'Hidrata la chía',
+      descripcion: 'Mezcla la chía con 0.3 litros de agua y déjala reposar 10 minutos.',
+      tiempo: '10 minutos',
+      porQue: 'La chía se expande y crea una textura gelatinosa.',
+      nivelImportancia: 'critico',
+    },
+    {
+      numero: 2,
+      titulo: 'Corta el pepino y el limón',
+      descripcion: 'Corta el pepino en rodajas finas. Exprime los limones. Colócalos en una jarra con el agua restante.',
+      tiempo: '3 minutos',
+      consejo: 'Si el pepino es orgánico, no lo peles; la cáscara tiene muchos nutrientes.',
+    },
+    {
+      numero: 3,
+      titulo: 'Mezcla y endulza',
+      descripcion: 'Agrega la chía hidratada y la miel. Revuelve bien y sirve con hielo.',
+      tiempo: '2 minutos',
+      chefPregunta: '¿Por qué la chía se usa en bebidas para deportistas?',
+      respuestaEsperada: 'Porque ayuda a mantener la hidratación y aporta energía de liberación lenta.',
+    }
+  ],
+  tip: 'Puedes agregar unas hojas de menta para un toque más fresco.',
+  ahorro: 'El pepino y el limón son muy baratos.',
+  errorComun: 'No hidratar la chía y sentir las semillas duras.',
+  popularidad: 85,
+  tags: ['bebida', 'detox', 'chia', 'pepino', 'saludable'],
+  tipoComida: 'barata',
+  historiaChef: 'Las bebidas con chía son una tendencia moderna, pero los aztecas y mayas ya las consumían por sus propiedades energéticas.',
+  chefInicio: 'Hoy vamos a hacer una bebida que te hidrata de verdad. La chía y el pepino son el dúo perfecto.',
+  chefFinal: '¡Excelente! Tienes una bebida refrescante y funcional.',
+  señalesExito: { vista: 'Agua transparente con rodajas de pepino y chía.', olor: 'Aroma cítrico y fresco.', textura: 'Líquida con perlas de chía.' },
+  rescates: [{ problema: 'Sabe muy simple', solucion: 'Agrega más limón y un toque de sal.' }]
+};

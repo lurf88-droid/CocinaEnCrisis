@@ -1,0 +1,60 @@
+import type { Receta } from '@/types/receta';
+
+export const AGUA_GUAYABA_LIMON: Receta = {
+  id: 'agua-guayaba-limon',
+  titulo: 'Agua fresca de guayaba y limón',
+  imagen: require('../../../../assets/images/recetas/bebidas/aguas/agua-guayaba-limon.webp'),
+  descripcion: 'Una bebida aromática y exótica. Aprende a extraer la pectina natural de la guayaba para lograr una textura única sin necesidad de lácteos.',
+  cocina: 'mexicana',
+  tecnicaPrincipal: 'licuado y colado de pulpa con semillas',
+  categoria: 'bebida',
+  rolCulinario: 'bebida',
+  porciones: 4,
+  tiempoMinutos: 15,
+  dificultad: 'facil',
+  nivelChef: 2,
+  aprendizajes: ['manejo de frutas con semillas duras', 'extracción de pectina natural', 'balance ácido-dulce'],
+  ingredientes: [
+    { id: 'guayaba', cantidad: 0.400, unidad: 'kg' },
+    { id: 'limon', cantidad: 2, unidad: 'pieza' },
+    { id: 'azucar', cantidad: 0.060, unidad: 'kg' },
+    { id: 'agua', cantidad: 1.500, unidad: 'litro' },
+  ],
+  pasos: [
+    {
+      numero: 1,
+      titulo: 'Prepara la guayaba',
+      descripcion: 'Lava y corta la guayaba en cuartos. No necesitas pelarla, la cáscara tiene mucho sabor.',
+      tiempo: '3 minutos',
+      consejo: 'Elige guayabas que estén ligeramente blandas; las duras no tendrán dulzor.',
+    },
+    {
+      numero: 2,
+      titulo: 'Licúa y cuela',
+      descripcion: 'Licúa la guayaba con 1 litro de agua. Cuela la mezcla con un colador fino, presionando con una cuchara para extraer toda la pulpa.',
+      tiempo: '4 minutos',
+      porQue: 'Las semillas de la guayaba son muy duras; el colado es obligatorio para una textura sedosa.',
+      mensajeChef: 'La guayaba dará un color rosa hermoso y un aroma inconfundible.',
+      nivelImportancia: 'critico',
+    },
+    {
+      numero: 3,
+      titulo: 'El toque cítrico',
+      descripcion: 'Agrega el jugo de limón, el azúcar y el agua fría restante. Mezcla bien y sirve helada.',
+      tiempo: '2 minutos',
+      chefPregunta: '¿Por qué la guayaba es tan aromática?',
+      respuestaEsperada: 'Porque contiene compuestos volátiles (ésteres) que se liberan fácilmente al romper la fruta.',
+    }
+  ],
+  tip: 'Una hoja de hierbabuena en el vaso le da un contraste perfecto.',
+  ahorro: 'La guayaba es una fruta nacional muy económica y llena de vitamina C.',
+  errorComun: 'No colarla bien y sentir las semillas al beber.',
+  popularidad: 85,
+  tags: ['bebida', 'guayaba', 'exotica', 'mexicana', 'aromatica'],
+  tipoComida: 'barata',
+  historiaChef: 'La guayaba es originaria de América tropical. En México se cultiva en casi todo el país y es la base de muchas aguas frescas tradicionales.',
+  chefInicio: 'Hoy vamos a preparar un agua con un aroma que llenará toda tu cocina.',
+  chefFinal: '¡Excelente! Tienes una bebida exótica de color rosa y textura perfecta.',
+  señalesExito: { vista: 'Color rosa pálido opaco.', olor: 'Aroma intenso a guayaba fresca.', textura: 'Suave y sin semillas.' },
+  rescates: [{ problema: 'Quedó sin sabor', solucion: 'Agrega una guayaba más y vuelve a licuar; a veces las frutas no están dulces.' }]
+};

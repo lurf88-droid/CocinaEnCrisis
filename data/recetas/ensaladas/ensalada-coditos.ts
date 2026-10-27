@@ -3,7 +3,7 @@ import type { Receta } from '@/types/receta';
 export const ENSALADA_CODITOS: Receta = {
   id: 'ensalada-coditos',
   titulo: 'Ensalada de coditos con jamón',
-  imagen: require('../../../assets/images/recetas/ensaladas/ensalada-coditos'), 
+  imagen: require('../../../assets/images/recetas/ensaladas/ensalada-coditos.webp'), 
   descripcion: 'El rey de las fiestas infantiles y las comidas familiares. Aprende a cocinar la pasta perfecta para ensalada, evitando que se pegue o se pase de cocción.',
   
   cocina: 'mexicana',

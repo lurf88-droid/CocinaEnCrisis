@@ -3,7 +3,7 @@ import type { Receta } from '@/types/receta';
 export const ENSALADA_GARBANZOS: Receta = {
   id: 'ensalada-garbanzos',
   titulo: 'Ensalada de garbanzos y atún',
-imagen: require('../../../assets/images/recetas/ensaladas/ensalada-garbanzos'), 
+imagen: require('../../../assets/images/recetas/ensaladas/ensalada-garbanzos.webp'), 
   descripcion: 'Una ensalada mediterránea cargada de proteína y fibra. Aprende a usar legumbres enlatadas correctamente y a crear un aderezo fresco que no las haga sentir pesadas.',
   
   cocina: 'mediterranea',

@@ -3,7 +3,7 @@ import type { Receta } from '@/types/receta';
 export const ENSALADA_POLLO_AGUACATE: Receta = {
   id: 'ensalada-pollo-aguacate',
   titulo: 'Ensalada de pollo y aguacate',
-  imagen: require('../../../assets/images/recetas/ensaladas/ensalada-pollo-aguacate'), 
+  imagen: require('../../../assets/images/recetas/ensaladas/ensalada-pollo-aguacate.webp'), 
   descripcion: 'Una ensalada completa, llena de proteína y grasas saludables. Aprende a mantener el aguacate verde y a equilibrar un aderezo cítrico que realza el sabor del pollo.',
   
   cocina: 'internacional',

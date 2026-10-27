@@ -1,0 +1,62 @@
+import type { Receta } from '@/types/receta';
+
+export const AGUA_FRUTAS: Receta = {
+  id: 'agua-frutas',
+  titulo: 'Agua fresca de frutas (Ponche)',
+  imagen: require('../../../../assets/images/recetas/bebidas/aguas/agua-frutas.webp'),
+  descripcion: 'La bebida más colorida y festiva. Una mezcla de frutas de temporada que se maceran para crear un cóctel sin alcohol dulce, ácido y súper refrescante.',
+  cocina: 'mexicana',
+  tecnicaPrincipal: 'maceración de frutas mixtas',
+  categoria: 'bebida',
+  rolCulinario: 'bebida',
+  porciones: 6,
+  tiempoMinutos: 20,
+  dificultad: 'facil',
+  nivelChef: 1,
+  aprendizajes: ['maceración de frutas', 'balance de sabores', 'aprovechamiento de fruta'],
+  ingredientes: [
+    { id: 'manzana', cantidad: 2, unidad: 'pieza' },
+    { id: 'naranja', cantidad: 2, unidad: 'pieza' },
+    { id: 'guayaba', cantidad: 0.100, unidad: 'kg' },
+    { id: 'platano', cantidad: 1, unidad: 'pieza' },
+    { id: 'azucar', cantidad: 0.080, unidad: 'kg' },
+    { id: 'agua', cantidad: 1.500, unidad: 'litro' },
+  ],
+  pasos: [
+    {
+      numero: 1,
+      titulo: 'Pica las frutas',
+      descripcion: 'Lava y pica la manzana, la naranja y la guayaba en cuadritos pequeños. Pela y corta el plátano en rodajas.',
+      tiempo: '5 minutos',
+      consejo: 'Corta las frutas del mismo tamaño para que se vean bien en el vaso.',
+    },
+    {
+      numero: 2,
+      titulo: 'Macera con azúcar',
+      descripcion: 'En una jarra grande, coloca las frutas y espolvorea el azúcar encima. Deja reposar 10 minutos para que suelten su jugo.',
+      tiempo: '10 minutos',
+      porQue: 'El azúcar extrae los jugos naturales de la fruta, creando un almíbar que endulza la bebida.',
+      mensajeChef: 'La maceración es el secreto de las aguas de frutas de las fondas.',
+      nivelImportancia: 'clave',
+    },
+    {
+      numero: 3,
+      titulo: 'Agrega agua y sirve',
+      descripcion: 'Vierte el agua fría y revuelve. Sirve con hielo y una cuchara para comer la fruta.',
+      tiempo: '2 minutos',
+      chefPregunta: '¿Por qué el plátano se pone negro en el agua de frutas?',
+      respuestaEsperada: 'Porque se oxida al contacto con el aire y el agua. Se recomienda agregarlo al final.',
+    }
+  ],
+  tip: 'Agrega el plátano justo antes de servir para que no se ponga negro.',
+  ahorro: 'Es perfecta para usar la fruta que está a punto de madurar.',
+  errorComun: 'Dejar la fruta mucho tiempo en el agua y que sepa a fermentado.',
+  popularidad: 90,
+  tags: ['bebida', 'frutas', 'mexicana', 'festiva', 'ponche'],
+  tipoComida: 'barata',
+  historiaChef: 'El agua de frutas es una adaptación mexicana del ponche navideño, pero se consume todo el año. Es común en fiestas y reuniones familiares.',
+  chefInicio: 'Hoy vamos a hacer la bebida más colorida de México. Entre más frutas, mejor.',
+  chefFinal: '¡Listo! Tienes una bebida llena de color y sabor.',
+  señalesExito: { vista: 'Agua clara con trozos de fruta flotando.', olor: 'Aroma a naranja y guayaba.', textura: 'Líquida con tropezones de fruta.' },
+  rescates: [{ problema: 'Quedó muy simple', solucion: 'Agrega más fruta o un chorrito de limón.' }]
+};

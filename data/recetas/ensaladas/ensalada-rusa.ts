@@ -3,7 +3,7 @@ import type { Receta } from '@/types/receta';
 export const ENSALADA_RUSA: Receta = {
   id: 'ensalada-rusa',
   titulo: 'Ensalada Rusa tradicional',
-  imagen: require('../../../assets/images/recetas/ensaladas/ensalada-rusa'), 
+  imagen: require('../../../assets/images/recetas/ensaladas/ensalada-rusa.webp'), 
   descripcion: 'Un clásico que no falla. Aprende el punto exacto de cocción de las verduras y cómo evitar que la mayonesa se corte por el calor.',
   
   cocina: 'internacional',

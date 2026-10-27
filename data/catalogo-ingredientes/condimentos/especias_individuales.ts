@@ -6,7 +6,38 @@ export const ESPECIAS_INDIVIDUALES: IngredienteCatalogo[] = [
 
 
 
-
+  {
+    id: 'flor_jamaica',
+    nombre: 'Flor de Jamaica',
+    aliases: ['jamaica', 'hibiscus', 'flor de jamaica seca'],
+    precioUnitario: 150, unidad: 'kg',
+    categoria: 'despensa', subcategoria: 'infusiones', basico: false,
+    tags: ['acida', 'seca', 'mexicana'],
+    cocinas: ['mexicana', 'latinoamericana'],
+    tecnicas: ['infusionar', 'hervir'],
+    nivel: 'basico',
+    familias: ['despensa', 'infusiones'],
+    usos: ['bebidas', 'salsas'],
+    roles: ['sabor_principal', 'colorante'],
+    combinaCon: ['jengibre', 'canela'],
+    perfilSabor: { ...SABOR_BASE, dulce: 1, acido: 9, salado: 0, amargo: 3, umami: 0, picante: 0, ahumado: 0, graso: 0, fresco: 4, aromatico: 6 },
+  },
+    {
+    id: 'te_negro',
+    nombre: 'Té negro',
+    aliases: ['hojas de te negro', 'english breakfast'],
+    precioUnitario: 400, unidad: 'kg',
+    categoria: 'despensa', subcategoria: 'infusiones', basico: false,
+    tags: ['amargo', 'cafeina'],
+    cocinas: ['internacional', 'britanica'],
+    tecnicas: ['infusionar', 'hervir'],
+    nivel: 'basico',
+    familias: ['despensa', 'infusiones'],
+    usos: ['bebidas'],
+    roles: ['base'],
+    combinaCon: ['limon', 'miel'],
+    perfilSabor: { ...SABOR_BASE, dulce: 0, acido: 1, salado: 0, amargo: 8, umami: 2, picante: 0, ahumado: 2, graso: 0, fresco: 2, aromatico: 8 },
+  },
 {
 id:'oregano_seco',
 

@@ -4,7 +4,22 @@ import { SABOR_BASE } from '@/types/saborBase';
 export const AROMATICOS: IngredienteCatalogo[] = [
 
 
-
+   {
+    id: 'lavanda',
+    nombre: 'Lavanda',
+    aliases: ['flores de lavanda', 'lavender'],
+    precioUnitario: 1500, unidad: 'kg',
+    categoria: 'condimentos', subcategoria: 'flores', basico: false,
+    tags: ['floral', 'gourmet'],
+    cocinas: ['francesa', 'reposteria'],
+    tecnicas: ['infusionar', 'decorar'],
+    nivel: 'intermedio',
+    familias: ['condimentos', 'flores'],
+    usos: ['bebidas', 'postres'],
+    roles: ['aroma'],
+    combinaCon: ['limon', 'miel'],
+    perfilSabor: { ...SABOR_BASE, dulce: 3, acido: 0, salado: 0, amargo: 2, umami: 0, picante: 0, ahumado: 0, graso: 0, fresco: 5, aromatico: 10 },
+  },
 
 {
 id:'cebollin',

@@ -1,0 +1,62 @@
+import type { Receta } from '@/types/receta';
+
+export const AGUA_JENGIBRE_MENTA: Receta = {
+  id: 'agua-jengibre-menta',
+  titulo: 'Agua infusionada de jengibre y menta',
+  imagen: require('../../../../assets/images/recetas/bebidas/aguas/agua-jengibre-menta.webp'),
+  descripcion: 'Una bebida con propiedades medicinales y un sabor picante y refrescante. Aprende a extraer el jengibre sin hervirlo para conservar su frescura.',
+  cocina: 'internacional',
+  tecnicaPrincipal: 'infusión en frío y maceración',
+  categoria: 'bebida',
+  rolCulinario: 'bebida',
+  porciones: 4,
+  tiempoMinutos: 10,
+  dificultad: 'facil',
+  nivelChef: 1,
+  aprendizajes: ['maceración de raíces', 'infusión de hierbas frescas', 'bebidas funcionales'],
+  ingredientes: [
+    { id: 'jengibre', cantidad: 0.050, unidad: 'kg' },
+    { id: 'hierbabuena', cantidad: 0.030, unidad: 'kg' },
+    { id: 'limon', cantidad: 2, unidad: 'pieza' },
+    { id: 'miel', cantidad: 0.040, unidad: 'kg' },
+    { id: 'agua', cantidad: 1.500, unidad: 'litro' },
+  ],
+  pasos: [
+    {
+      numero: 1,
+      titulo: 'Prepara el jengibre',
+      descripcion: 'Pela el jengibre y córtalo en rodajas muy finas (o rállalo). Ponlo en una jarra con el agua y el jugo de limón.',
+      tiempo: '4 minutos',
+      consejo: 'Entre más fino el corte, más rápido soltará su sabor.',
+      porQue: 'El jengibre no necesita calor para infusionar; el limón y el agua fría extraen su sabor sin amargor.',
+      nivelImportancia: 'critico',
+    },
+    {
+      numero: 2,
+      titulo: 'Machaca la menta',
+      descripcion: 'Agrega las hojas de hierbabuena. Con una cuchara de madera, machácalas suavemente dentro de la jarra.',
+      tiempo: '2 minutos',
+      mensajeChef: 'El aroma de la menta y el jengibre despertará hasta al más dormido.',
+      nivelImportancia: 'clave',
+    },
+    {
+      numero: 3,
+      titulo: 'Endulza y deja reposar',
+      descripcion: 'Agrega la miel y revuelve. Deja reposar en el refrigerador por 20 minutos antes de servir.',
+      tiempo: '20 minutos (inactivo)',
+      chefPregunta: '¿Por qué el jengibre se siente "picante" en la boca?',
+      respuestaEsperada: 'Por el gingerol, un compuesto que activa los receptores de calor en la lengua.',
+    }
+  ],
+  tip: 'Si tienes una botella de vidrio, puedes prepararla y llevarla al trabajo; entre más tiempo, más sabor.',
+  ahorro: 'Una raíz de jengibre rinde muchísimo y es barata.',
+  errorComun: 'Hervir el jengibre y la menta juntos; el jengibre se vuelve amargo y la menta pierde su frescura.',
+  popularidad: 78,
+  tags: ['bebida', 'funcional', 'jengibre', 'menta', 'detox'],
+  tipoComida: 'barata',
+  historiaChef: 'El jengibre es una raíz milenaria usada en la medicina tradicional china. En la cocina moderna, se usa para bebidas funcionales por sus propiedades antiinflamatorias.',
+  chefInicio: 'Hoy vamos a hacer una bebida que también es un remedio. El jengibre fresco es un tesoro.',
+  chefFinal: '¡Perfecto! Tienes una bebida que refresca y reconforta a la vez.',
+  señalesExito: { vista: 'Agua transparente con rodajas de jengibre y hojas de menta.', olor: 'Aroma potente a jengibre y menta fresca.', textura: 'Líquida y refrescante.' },
+  rescates: [{ problema: 'Sabe demasiado a jengibre', solucion: 'Retira las rodajas de jengibre de la jarra y agrega más agua.' }]
+};

@@ -1,0 +1,60 @@
+import type { Receta } from '@/types/receta';
+
+export const AGUA_FRESA: Receta = {
+  id: 'agua-fresa',
+  titulo: 'Agua fresca de fresa',
+  imagen: require('../../../../assets/images/recetas/bebidas/aguas/agua-fresa.webp'),
+  descripcion: 'Dulce, roja y adictiva. Aprende a macerar las fresas para que suelten todo su jugo y logren ese color rojo intenso sin usar colorantes artificiales.',
+  cocina: 'mexicana',
+  tecnicaPrincipal: 'maceración de fruta y licuado ligero',
+  categoria: 'bebida',
+  rolCulinario: 'bebida',
+  porciones: 4,
+  tiempoMinutos: 15,
+  dificultad: 'facil',
+  nivelChef: 1,
+  aprendizajes: ['maceración de frutas', 'extracción de color natural', 'balance ácido'],
+  ingredientes: [
+    { id: 'fresa', cantidad: 0.500, unidad: 'kg' },
+    { id: 'azucar', cantidad: 0.080, unidad: 'kg' },
+    { id: 'limon', cantidad: 1, unidad: 'pieza' },
+    { id: 'agua', cantidad: 1.000, unidad: 'litro' },
+  ],
+  pasos: [
+    {
+      numero: 1,
+      titulo: 'Macerar las fresas',
+      descripcion: 'Lava y desinfecta las fresas. Quita el rabito y córtalas en trozos. Mézclalas con el azúcar en un tazón y déjalas reposar 10 minutos.',
+      tiempo: '10 minutos',
+      consejo: 'El azúcar extraerá el jugo de las fresas y creará un almíbar natural.',
+      porQue: 'La maceración (azúcar + fruta) rompe la pared celular de la fruta y libera los jugos, intensificando el color y el sabor.',
+      mensajeChef: 'La paciencia de la maceración se traduce en un color rojo perfecto.',
+      nivelImportancia: 'critico',
+    },
+    {
+      numero: 2,
+      titulo: 'Licúa',
+      descripcion: 'Licúa las fresas maceradas con su jugo y el agua. Si quieres una bebida más ligera, puedes colarla.',
+      tiempo: '2 minutos',
+    },
+    {
+      numero: 3,
+      titulo: 'Ajusta y sirve',
+      descripcion: 'Agrega el jugo de limón y mezcla. Sirve bien fría.',
+      tiempo: '1 minuto',
+      chefPregunta: '¿Por qué la fresa pierde su color rojo cuando se congela?',
+      respuestaEsperada: 'Porque el agua de la fruta forma cristales de hielo que rompen las células y liberan el pigmento rojo en el agua.',
+    }
+  ],
+  tip: 'No le quites las hojas verdes antes de lavarlas, así evitas que el agua entre en la fruta y la haga menos dulce.',
+  ahorro: 'Aprovecha las fresas que estén muy maduras o un poco magulladas.',
+  errorComun: 'Agregar demasiada agua y que el agua de fresa se vuelva rosa pálido.',
+  popularidad: 92,
+  tags: ['bebida', 'fresa', 'fruta', 'dulce'],
+  tipoComida: 'barata',
+  historiaChef: 'La fresa llegó a México en el siglo XX y encontró su lugar perfecto en las aguas frescas. A los mexicanos nos encanta su color y dulzor natural.',
+  chefInicio: 'Hoy vamos a sacar el color natural de la fresa. No hay colorante más bonito que la maceración.',
+  chefFinal: '¡Listo! Tienes un agua fresca roja intensa y llena de sabor.',
+  señalesExito: { vista: 'Color rojo vibrante y opaco.', olor: 'Aroma dulce a fresa.', textura: 'Líquida con un toque de pulpa.' },
+  rescates: [{ problema: 'La fresa no estaba dulce', solucion: 'Agrega más azúcar o un poco de miel.' }]
+};
