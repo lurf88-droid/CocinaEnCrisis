@@ -5,7 +5,7 @@ import React, {
 
 import {
   Alert,
-  ScrollView, // 👈 1. Importamos ScrollView
+  ScrollView, 
   StyleSheet,
   TouchableOpacity,
   View,
@@ -21,7 +21,7 @@ import { PantryStatusHero } from '@/components/home/PantryStatusHero';
 import { ChefOpportunityCard } from '@/components/home/ChefOpportunityCard';
 import { ChefRecommendationCard } from '@/components/chef/ChefRecommendationCard';
 
-// 👈 2. Importamos la nueva tarjeta pequeña
+import { useUserPreferences } from '@/context/UserPreferencesContext';
 import { AlternativeRecipeCard } from '@/components/home/AlternativeRecipeCard';
 
 import { AppText } from '@/components/ui/AppText';
@@ -81,17 +81,55 @@ export default function HomeScreen() {
     agregarIngrediente 
   } = useIngredientes();
 
+  // 👇 1. EXTRAEMOS LAS PREFERENCIAS DEL USUARIO
+  const { preferences } = useUserPreferences();
+
   const [modo, setModo] = useState<ChefMode>('crisis');
 
 
   // ====================================================
-  // 🔎 RESULTADOS Y DASHBOARD
+  // 🔎 RESULTADOS Y DASHBOARD (CON FILTRO INTELIGENTE)
   // ====================================================
 
   const resultados = useMemo(() => {
     if (ingredientes.length === 0) return [];
-    return buscarRecetas(ingredientes, presupuestoNum);
-  }, [ingredientes, presupuestoNum, buscarRecetas]);
+
+    let recetas = buscarRecetas(ingredientes, presupuestoNum);
+
+    // 🚨 FILTRO POR PREFERENCIAS
+    if (preferences.vegetariano || preferences.vegano) {
+      recetas = recetas.filter(r => 
+        r.tags?.includes('vegetariano') || 
+        r.tags?.includes('vegano') ||
+        r.tags?.includes('vegetariana')
+      );
+    }
+    
+    if (preferences.sinLacteos) {
+      recetas = recetas.filter(r => 
+        !r.ingredientes.some(i => 
+          i.id.includes('leche') || 
+          i.id.includes('queso') || 
+          i.id.includes('crema') || 
+          i.id.includes('mantequilla') ||
+          i.id.includes('yogurt')
+        )
+      );
+    }
+
+    if (preferences.sinGluten) {
+      recetas = recetas.filter(r => 
+        !r.ingredientes.some(i => 
+          i.id.includes('harina') || 
+          i.id.includes('pan') || 
+          i.id.includes('pasta') ||
+          i.id.includes('trigo')
+        )
+      );
+    }
+
+    return recetas;
+  }, [ingredientes, presupuestoNum, buscarRecetas, preferences]);
 
   const dashboard = ChefEngine.dashboard({
     resultados,
@@ -107,7 +145,7 @@ export default function HomeScreen() {
     recomendacionPrincipal,
     personalidad,
     estadisticas,
-    alternativas, // 👈 3. Extraemos las alternativas
+    alternativas,
   } = dashboard;
 
 
@@ -390,7 +428,7 @@ export default function HomeScreen() {
       )}
 
 
-      {/* 👇 4. NUEVO CARRUSEL ESTILO NETFLIX */}
+      {/* CARRUSEL ESTILO NETFLIX */}
       {alternativas && alternativas.length > 0 && (
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
@@ -482,7 +520,6 @@ const styles = StyleSheet.create({
     paddingBottom: 180,
     backgroundColor: KitchenColors.background,
   },
-  // 👇 5. ESTILO PARA EL CARRUSEL
   carouselContainer: {
     paddingRight: 20,
     paddingBottom: 10,

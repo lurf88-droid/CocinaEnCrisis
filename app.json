@@ -2,7 +2,7 @@
   "expo": {
     "name": "Chef Luna",
     "slug": "CocinaEnCrisis",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "chefluna",
@@ -12,7 +12,7 @@
     },
     "android": {
       "package": "com.lunacode.cocinaencrisis",
-      "versionCode": 3,
+      "versionCode": 4,
       "adaptiveIcon": {
         "backgroundColor": "#1D1410",
         "foregroundImage": "./assets/images/adaptive-icon.png"

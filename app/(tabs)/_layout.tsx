@@ -185,7 +185,7 @@ export default function TabLayout() {
                     : 'home-variant-outline'
                 }
                 size={26}
-                color={color}
+                color={color as string}
               />
 
             ),
@@ -222,7 +222,7 @@ export default function TabLayout() {
                     : 'basket-outline'
                 }
                 size={26}
-                color={color}
+                color={color as string}
               />
 
             ),
@@ -293,7 +293,7 @@ export default function TabLayout() {
                     : 'book-open-outline'
                 }
                 size={26}
-                color={color}
+                color={color as string}
               />
 
             ),
@@ -330,7 +330,44 @@ export default function TabLayout() {
                     : 'heart-outline'
                 }
                 size={26}
-                color={color}
+                color={color as string}
+              />
+
+            ),
+
+        }}
+      />
+
+
+      {/* =================================================
+          PERFIL
+      ================================================= */}
+
+
+      <Tabs.Screen
+        name="perfil"
+        options={{
+
+          title:
+            'Perfil',
+
+          tabBarLabel:
+            'Perfil',
+
+          tabBarIcon:
+            ({
+              color,
+              focused,
+            }) => (
+
+              <MaterialCommunityIcons
+                name={
+                  focused
+                    ? 'account'
+                    : 'account-outline'
+                }
+                size={26}
+                color={color as string}
               />
 
             ),

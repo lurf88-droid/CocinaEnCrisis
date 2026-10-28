@@ -2,7 +2,124 @@ import type { IngredienteCatalogo } from '@/data/catalogo-ingredientes';
 import { SABOR_BASE } from '@/types/saborBase';
 
 export const PANES: IngredienteCatalogo[] = [
+  {
+    id: 'pan_hamburguesa',
 
+    nombre: 'Pan para hamburguesa',
+
+    aliases: [
+      'pan de hamburguesa',
+      'bollo de hamburguesa',
+      'burger bun',
+      'pan'
+    ],
+
+    precioUnitario: 6,
+
+    unidad: 'pieza',
+
+    precio: {
+      minimo: 4,
+      promedio: 6,
+      maximo: 12,
+      moneda: 'MXN',
+      actualizado: '2026-08',
+    },
+
+    categoria: 'panaderia',
+
+    subcategoria: 'panes_salados',
+
+    basico: false,
+
+    tags: [
+      'pan',
+      'hamburguesa',
+      'comida_rapida',
+      'suave'
+    ],
+
+    cocinas: [
+      'internacional',
+      'americana'
+    ],
+
+    tecnicas: [
+      'hornear',
+      'tostar'
+    ],
+
+    nivel: 'basico',
+
+    familias: [
+      'panaderia',
+      'panes'
+    ],
+
+    usos: [
+      'hamburguesas',
+      'sandwiches',
+      'botanas'
+    ],
+
+    roles: [
+      'base',
+      'contenedor'
+    ],
+
+    combinaCon: [
+      'carne',
+      'queso',
+      'lechuga',
+      'jitomate'
+    ],
+
+    sustitutos: [
+      'bolillo',
+      'pan_integral'
+    ],
+
+    sustitutosEconomicos: [
+      'bolillo'
+    ],
+
+    perfilSabor: {
+      ...SABOR_BASE,
+
+      dulce: 3,
+      acido: 0,
+      salado: 1,
+      amargo: 0,
+      umami: 1,
+      picante: 0,
+
+      ahumado: 0,
+      graso: 2,
+      fresco: 2,
+      aromatico: 3,
+    },
+
+    sabores: [
+      'neutro',
+      'ligeramente_dulce'
+    ],
+
+    texturas: [
+      'suave',
+      'esponjoso'
+    ],
+
+    temporada: [
+      'todo_el_año'
+    ],
+
+    conservacion:
+      'ambiente',
+
+    recetasCompatibles: [
+      'hamburguesa-lentejas'
+    ]
+  },
   // ====================================================
   // 🫓 PAN PITA
   // ====================================================

@@ -350,8 +350,22 @@ import { GUACAMOLE_TRADICIONAL } from './recetas/snacks/guacamole-tradicional';
 
 //VEGETARIANOS//
 import { TORTITAS_BROCOLI } from './recetas/vegetarianos/tortitas-brocoli';
-
-
+import { CURRY_GARBANZO } from './recetas/vegetarianos/curry-garbanzo';
+import { CHAMPINONES_AJILLO } from './recetas/vegetarianos/champinones-ajillo';
+import { TACOS_NOPAL } from './recetas/vegetarianos/tacos-nopal';
+import { PASTA_ALFREDO_BROCOLI } from './recetas/vegetarianos/pasta-alfredo-brocoli';
+import { HAMBURGUESA_LENTEJAS } from './recetas/vegetarianos/hamburguesa-lentejas';
+import { BROCOLI_BECHAMEL } from './recetas/vegetarianos/brocoli-bechamel';
+import { TORTITAS_CALABACITA } from './recetas/vegetarianos/tortitas-calabacita';
+import { CHILES_RELLENOS_QUESO } from './recetas/vegetarianos/chiles-rellenos-queso';
+import { LASANA_CALABACITA } from './recetas/vegetarianos/lasana-calabacita';
+import { RISOTTO_CHAMPINONES } from './recetas/vegetarianos/risotto-champinones';
+import { BERENJENAS_PARMESANA } from './recetas/vegetarianos/berenjenas-parmesana';
+import { CHILES_NOGADA_VEGETARIANOS } from './recetas/vegetarianos/chiles-nogada-vegetarianos';
+import { PASTA_BOLONESA_LENTEJAS } from './recetas/vegetarianos/pasta-bolonesa-lentejas';
+import { PORTOBELLOS_RELLENOS } from './recetas/vegetarianos/portobellos-rellenos';
+import { TACOS_CHAMPINONES_PASTOR } from './recetas/vegetarianos/tacos-champinones-pastor';
+import { TARTA_CEBOLLA_QUESO } from './recetas/vegetarianos/tarta-cebolla-queso';
 //ENSALADAS//
 import { ENSALADA_HUERTA } from './recetas/ensaladas/ensalada-huerta';
 import { ENSALADA_CESAR } from './recetas/ensaladas/ensalada-cesar';
@@ -539,6 +553,26 @@ LICUADO_PLATANO,
 GUACAMOLE_TRADICIONAL,
 //VEGETARIANO//
 TORTITAS_BROCOLI,
+ CURRY_GARBANZO,
+  CHAMPINONES_AJILLO,
+  TACOS_NOPAL,
+  PASTA_ALFREDO_BROCOLI,
+  HAMBURGUESA_LENTEJAS,
+  BROCOLI_BECHAMEL,
+  TORTITAS_CALABACITA,
+  CHILES_RELLENOS_QUESO,
+  LASANA_CALABACITA,
+  RISOTTO_CHAMPINONES,
+  BERENJENAS_PARMESANA,
+  CHILES_NOGADA_VEGETARIANOS,
+  PASTA_BOLONESA_LENTEJAS,
+  PORTOBELLOS_RELLENOS,
+  TACOS_CHAMPINONES_PASTOR,
+  TARTA_CEBOLLA_QUESO,
+
+
+
+
 
 //ENSALADAS//
 ENSALADA_HUERTA,

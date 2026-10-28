@@ -38,6 +38,238 @@ export const ESPECIAS_INDIVIDUALES: IngredienteCatalogo[] = [
     combinaCon: ['limon', 'miel'],
     perfilSabor: { ...SABOR_BASE, dulce: 0, acido: 1, salado: 0, amargo: 8, umami: 2, picante: 0, ahumado: 2, graso: 0, fresco: 2, aromatico: 8 },
   },
+    {
+    id: 'perejil',
+
+    nombre: 'Perejil',
+
+    aliases: [
+      'perejil fresco',
+      'perejil liso',
+      'parsley'
+    ],
+
+    precioUnitario: 50,
+
+    unidad: 'kg',
+
+    precio: {
+      minimo: 30,
+      promedio: 50,
+      maximo: 80,
+      moneda: 'MXN',
+      actualizado: '2026-08',
+    },
+
+    categoria: 'verduras',
+
+    subcategoria: 'hierbas_frescas',
+
+    basico: false,
+
+    tags: [
+      'aromatico',
+      'fresco',
+      'hierba'
+    ],
+
+    cocinas: [
+      'mediterranea',
+      'internacional',
+      'mexicana'
+    ],
+
+    tecnicas: [
+      'picar',
+      'decorar'
+    ],
+
+    nivel: 'basico',
+
+    familias: [
+      'hierbas',
+      'apiáceas'
+    ],
+
+    usos: [
+      'decoracion',
+      'salsas',
+      'guisos',
+      'ensaladas'
+    ],
+
+    roles: [
+      'aroma',
+      'frescura'
+    ],
+
+    combinaCon: [
+      'ajo',
+      'limon',
+      'mantequilla'
+    ],
+
+    sustitutos: [
+      'cilantro'
+    ],
+
+    sustitutosEconomicos: [
+      'cilantro'
+    ],
+
+    perfilSabor: {
+      ...SABOR_BASE,
+
+      dulce: 1,
+      acido: 0,
+      salado: 0,
+      amargo: 1,
+      umami: 1,
+      picante: 0,
+
+      ahumado: 0,
+      graso: 0,
+      fresco: 9,
+      aromatico: 8,
+    },
+
+    sabores: [
+      'fresco',
+      'verde'
+    ],
+
+    texturas: [
+      'hoja',
+      'tierna'
+    ],
+
+    temporada: [
+      'todo_el_año'
+    ],
+
+    conservacion:
+      'refrigerado',
+
+    recetasCompatibles: [
+      'tortitas-calabacita',
+      'pasta-alfredo-brocoli'
+    ]
+  },
+    {
+    id: 'curry',
+
+    nombre: 'Curry en polvo',
+
+    aliases: [
+      'polvo de curry',
+      'mezcla de curry'
+    ],
+
+    precioUnitario: 300,
+
+    unidad: 'kg',
+
+    precio: {
+      minimo: 200,
+      promedio: 300,
+      maximo: 450,
+      moneda: 'MXN',
+      actualizado: '2026-08',
+    },
+
+    categoria: 'condimentos',
+
+    subcategoria: 'mezclas_especias',
+
+    basico: false,
+
+    tags: [
+      'especiado',
+      'aromatico',
+      'indio'
+    ],
+
+    cocinas: [
+      'india',
+      'asiatica',
+      'internacional'
+    ],
+
+    tecnicas: [
+      'sazonar',
+      'bloom',
+      'saltear'
+    ],
+
+    nivel: 'basico',
+
+    familias: [
+      'condimentos',
+      'especias'
+    ],
+
+    usos: [
+      'guisos',
+      'currys',
+      'arroz'
+    ],
+
+    roles: [
+      'sabor_principal',
+      'aroma'
+    ],
+
+    combinaCon: [
+      'leche_coco',
+      'garbanzos',
+      'pollo'
+    ],
+
+    sustitutos: [
+      'garam_masala'
+    ],
+
+    sustitutosEconomicos: [
+      'comino',
+      'pimienta_negra'
+    ],
+
+    perfilSabor: {
+      ...SABOR_BASE,
+
+      dulce: 0,
+      acido: 0,
+      salado: 0,
+      amargo: 2,
+      umami: 2,
+      picante: 4,
+
+      ahumado: 0,
+      graso: 0,
+      fresco: 0,
+      aromatico: 10,
+    },
+
+    sabores: [
+      'especiado',
+      'terroso'
+    ],
+
+    texturas: [
+      'polvo'
+    ],
+
+    temporada: [
+      'todo_el_año'
+    ],
+
+    conservacion:
+      'ambiente',
+
+    recetasCompatibles: [
+      'curry-garbanzo'
+    ]
+  },
 {
 id:'oregano_seco',
 

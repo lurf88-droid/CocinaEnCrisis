@@ -10,73 +10,79 @@ import 'react-native-reanimated';
 
 import { CiudadProvider } from '@/hooks/use-ciudad';
 import { IngredientesProvider } from '@/context/IngredientesContext';
+import { UserPreferencesProvider } from '@/context/UserPreferencesContext'; // 👈 1. NUEVO IMPORT
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
 
 export default function RootLayout() {
 
-const colorScheme = useColorScheme();
+  const colorScheme = useColorScheme();
 
-if (__DEV__) {
-  validarCatalogo();
-}
+  if (__DEV__) {
+    validarCatalogo();
+  }
 
-return (
+  return (
     <CiudadProvider>
 
       <IngredientesProvider>
 
-        <ThemeProvider
-          value={
-            colorScheme === 'dark'
-              ? DarkTheme
-              : DefaultTheme
-          }
-        >
+        {/* 👈 2. ENVOLVEMOS LA APP CON LAS PREFERENCIAS */}
+        <UserPreferencesProvider>
 
-          <Stack>
+          <ThemeProvider
+            value={
+              colorScheme === 'dark'
+                ? DarkTheme
+                : DefaultTheme
+            }
+          >
 
-            <Stack.Screen
-              name="intro"
-              options={{
-                headerShown: false,
-              }}
-            />
+            <Stack>
 
-            <Stack.Screen
-              name="(tabs)"
-              options={{
-                headerShown: false,
-              }}
-            />
+              <Stack.Screen
+                name="intro"
+                options={{
+                  headerShown: false,
+                }}
+              />
 
-            <Stack.Screen
-              name="receta/[id]"
-              options={{
-                headerShown: false,
-              }}
-            />
+              <Stack.Screen
+                name="(tabs)"
+                options={{
+                  headerShown: false,
+                }}
+              />
 
-            <Stack.Screen
-              name="cooking/[id]"
-              options={{
-                headerShown: false,
-              }}
-            />
+              <Stack.Screen
+                name="receta/[id]"
+                options={{
+                  headerShown: false,
+                }}
+              />
 
-            <Stack.Screen
-              name="modal"
-              options={{
-                presentation: 'modal',
-                title: 'Modal',
-              }}
-            />
+              <Stack.Screen
+                name="cooking/[id]"
+                options={{
+                  headerShown: false,
+                }}
+              />
 
-          </Stack>
+              <Stack.Screen
+                name="modal"
+                options={{
+                  presentation: 'modal',
+                  title: 'Modal',
+                }}
+              />
 
-          <StatusBar style="auto" />
+            </Stack>
 
-        </ThemeProvider>
+            <StatusBar style="auto" />
+
+          </ThemeProvider>
+
+        </UserPreferencesProvider>
 
       </IngredientesProvider>
 
