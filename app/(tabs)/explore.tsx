@@ -7,7 +7,7 @@ import {
   FlatList,
   ScrollView,
   StyleSheet,
-  Switch, // 👈 Agregamos Switch para el toggle
+  Switch,
   TextInput,
   TouchableOpacity,
   View,
@@ -21,8 +21,9 @@ import { AppText } from '@/components/ui/AppText';
 
 import { formatearPrecio } from '@/data/recetas';
 import { useCiudad } from '@/hooks/use-ciudad';
-import { useIngredientes } from '@/context/IngredientesContext'; // 👈 NUEVO
-import { evaluarReceta } from '@/services/recetas.service'; // 👈 NUEVO
+import { useIngredientes } from '@/context/IngredientesContext';
+import { useUserPreferences } from '@/context/UserPreferencesContext'; // 👈 NUEVO
+import { evaluarReceta } from '@/services/recetas.service';
 
 import {
   KitchenColors,
@@ -65,17 +66,19 @@ const ORDENES: { id: Orden; label: string; icon: React.ComponentProps<typeof Mat
 
 export default function RecetasScreen() {
 
-  // 👇 Traemos la despensa y la región
   const { recetasConCosto, fuentePrecios, region, regionId } = useCiudad();
   const { ingredientes, presupuesto } = useIngredientes();
+  
+  // 👇 1. EXTRAEMOS LAS PREFERENCIAS
+  const { preferences } = useUserPreferences();
 
   const [filtro, setFiltro] = useState<Filtro>('todas');
   const [busqueda, setBusqueda] = useState('');
-  const [soloPuedoCocinar, setSoloPuedoCocinar] = useState(false); // 👈 Estado nuevo
-  const [orden, setOrden] = useState<Orden>('recomendado'); // 👈 Estado nuevo
+  const [soloPuedoCocinar, setSoloPuedoCocinar] = useState(false);
+  const [orden, setOrden] = useState<Orden>('recomendado');
 
   // ====================================================
-  // 🧠 EVALUACIÓN Y FILTRADO PRO
+  // 🧠 EVALUACIÓN Y FILTRADO PRO (CON PREFERENCIAS)
   // ====================================================
 
   const recetasFiltradas = useMemo(() => {
@@ -98,6 +101,35 @@ export default function RecetasScreen() {
 
       // Filtro de categoría
       const coincideCategoria = filtro === 'todas' ? true : receta.categoria === filtro;
+
+      // 🚨 FILTRO DE PREFERENCIAS
+      if (preferences.vegetariano || preferences.vegano) {
+        const esVeggie = receta.tags?.includes('vegetariano') || 
+                         receta.tags?.includes('vegano') || 
+                         receta.tags?.includes('vegetariana');
+        if (!esVeggie) return false;
+      }
+
+      if (preferences.sinLacteos) {
+        const tieneLacteos = receta.ingredientes.some(i => 
+          i.id.includes('leche') || 
+          i.id.includes('queso') || 
+          i.id.includes('crema') || 
+          i.id.includes('mantequilla') ||
+          i.id.includes('yogurt')
+        );
+        if (tieneLacteos) return false;
+      }
+
+      if (preferences.sinGluten) {
+        const tieneGluten = receta.ingredientes.some(i => 
+          i.id.includes('harina') || 
+          i.id.includes('pan') || 
+          i.id.includes('pasta') ||
+          i.id.includes('trigo')
+        );
+        if (tieneGluten) return false;
+      }
 
       // Filtro de búsqueda
       const coincideBusqueda = texto.length === 0 ? true : (
@@ -122,7 +154,6 @@ export default function RecetasScreen() {
         case 'compatibilidad':
           return b.compatibilidad - a.compatibilidad;
         default:
-          // Recomendado: Popularidad y luego tiempo
           const popA = a.receta.popularidad ?? 0;
           const popB = b.receta.popularidad ?? 0;
           if (popB !== popA) return popB - popA;
@@ -131,9 +162,8 @@ export default function RecetasScreen() {
     });
 
     return lista;
-  }, [recetasConCosto, ingredientes, presupuesto, regionId, filtro, busqueda, soloPuedoCocinar, orden]);
+  }, [recetasConCosto, ingredientes, presupuesto, regionId, filtro, busqueda, soloPuedoCocinar, orden, preferences]); // 👈 preferences en las dependencias
 
-  // Mapeamos de vuelta a solo las recetas para las estadísticas y el render
   const recetas = recetasFiltradas.map(item => item.receta);
 
   // ====================================================
@@ -243,7 +273,7 @@ export default function RecetasScreen() {
         </ScrollView>
       </View>
 
-      {/* 👇 NUEVOS CONTROLES: Toggle y Orden */}
+      {/* CONTROLES: Toggle y Orden */}
       <View style={styles.controlsSection}>
         <View style={styles.toggleRow}>
           <View style={styles.toggleTextWrap}>
@@ -475,7 +505,7 @@ const styles = StyleSheet.create({
   filterText: { color: '#D4BBA2', fontSize: 12, fontWeight: '800' },
   filterTextActive: { color: '#27160B', fontWeight: '900' },
 
-  // 👇 NUEVOS CONTROLES
+  // CONTROLES
   controlsSection: { marginTop: 22, marginBottom: 4 },
   toggleRow: {
     flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',

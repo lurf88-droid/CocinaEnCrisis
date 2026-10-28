@@ -744,7 +744,7 @@ const styles =
     hero: {
 
       height:
-        300,
+        240,
 
       justifyContent:
         'flex-end',
@@ -754,14 +754,11 @@ const styles =
     },
 
 
-    heroImage: {
-
-      borderTopLeftRadius:
-        26,
-
-      borderTopRightRadius:
-        26,
-
+       heroImage: {
+      borderTopLeftRadius: 26,
+      borderTopRightRadius: 26,
+      width: '100%',
+      height: '100%',
     },
 
 
@@ -769,8 +766,7 @@ const styles =
 
       ...StyleSheet.absoluteFill,
       
-      backgroundColor:
-        'rgba(15, 8, 5, 0.38)',
+      backgroundColor: 'rgba(15, 8, 5, 0.35)',
 
     },
 
@@ -847,44 +843,26 @@ const styles =
         'auto',
 
     },
-
-
     title: {
-
-      color:
-        '#FFF3DD',
-
-      fontSize:
-        28,
-
-      fontWeight:
-        '900',
-
-      lineHeight:
-        34,
-
+      color: '#FFF3DD',
+      fontSize: 28,
+      fontWeight: '900',
+      lineHeight: 34,
+      textShadowColor: 'rgba(0, 0, 0, 0.95)', 
+      textShadowOffset: { width: 2, height: 2 }, 
+      textShadowRadius: 6,
     },
 
-
-    heroDescription: {
-
-      marginTop:
-        8,
-
-      color:
-        '#F2D9C2',
-
-      fontSize:
-        13,
-
-      lineHeight:
-        20,
-
-      fontWeight:
-        '700',
-
+       heroDescription: {
+      marginTop: 8,
+      color: '#F2D9C2',
+      fontSize: 13,
+      lineHeight: 20,
+      fontWeight: '700',
+      textShadowColor: 'rgba(0, 0, 0, 0.95)', // 👈 Agrégale esta sombra
+      textShadowOffset: { width: 1, height: 1 },
+      textShadowRadius: 4,
     },
-
 
     // ==================================================
     // CONTENT

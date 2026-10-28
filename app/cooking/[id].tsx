@@ -9,6 +9,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
+  Vibration, // 👈 Para la alarma
 } from 'react-native';
 
 import {
@@ -19,6 +20,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import * as Haptics from 'expo-haptics'; // 👈 Para las vibraciones
 
 import { useIngredientes } from '@/context/IngredientesContext';
 
@@ -45,7 +47,6 @@ import {
 
 export default function CookingScreen() {
 
-  // 👇 AGREGAMOS EL PARÁMETRO 'costo'
   const {
     id,
     costo,
@@ -77,6 +78,9 @@ export default function CookingScreen() {
     setPasoActual,
   ] = useState(0);
 
+  // Estados para el temporizador
+  const [timerActivo, setTimerActivo] = useState(false);
+  const [segundosRestantes, setSegundosRestantes] = useState(0);
 
   const [
     terminado,
@@ -204,6 +208,55 @@ export default function CookingScreen() {
       });
 
   }, [pasoActual]);
+
+
+  // ====================================================
+  // ⏱️ LÓGICA DEL TEMPORIZADOR
+  // ====================================================
+
+  useEffect(() => {
+   let interval: ReturnType<typeof setInterval>;
+    
+    if (timerActivo && segundosRestantes > 0) {
+      interval = setInterval(() => {
+        setSegundosRestantes((prev) => prev - 1);
+      }, 1000);
+    } else if (segundosRestantes === 0 && timerActivo) {
+      // ¡Se acabó el tiempo!
+      setTimerActivo(false);
+      Vibration.vibrate([500, 500, 500]); // Patrón de vibración
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+      Alert.alert('⏰ ¡Tiempo terminado!', 'Revisa tu preparación. El paso ha concluido.');
+    }
+
+    return () => clearInterval(interval);
+  }, [timerActivo, segundosRestantes]);
+
+  // Función para leer el texto "15 minutos" y pasarlo a segundos
+  const iniciarTemporizador = (tiempoTexto?: string) => {
+    if (!tiempoTexto) return;
+    
+    // Busca el número en el texto (ej. "15 minutos" -> 15)
+    const match = tiempoTexto.match(/(\d+)/);
+    if (!match) return;
+
+    let minutos = parseInt(match[1]);
+    // Si el texto dice "hora" o "horas", multiplicamos
+    if (tiempoTexto.toLowerCase().includes('hora')) {
+      minutos = minutos * 60;
+    }
+
+    setSegundosRestantes(minutos * 60);
+    setTimerActivo(true);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+  };
+
+  // Función para formatear el reloj bonito (ej. 10:05)
+  const formatearTiempo = (totalSegundos: number) => {
+    const min = Math.floor(totalSegundos / 60);
+    const seg = totalSegundos % 60;
+    return `${min.toString().padStart(2, '0')}:${seg.toString().padStart(2, '0')}`;
+  };
 
 
   // ====================================================
@@ -567,6 +620,19 @@ export default function CookingScreen() {
       scrollRef={scrollRef}
       style={styles.screen}
     >
+
+      {/* =================================================
+          RELOJ FLOTANTE (Solo aparece si el temporizador está activo)
+      ================================================= */}
+      {timerActivo && (
+        <View style={styles.floatingTimer}>
+          <MaterialCommunityIcons name="timer-sand" size={24} color="#1D1410" />
+          <AppText style={styles.floatingTimerText}>{formatearTiempo(segundosRestantes)}</AppText>
+          <TouchableOpacity onPress={() => setTimerActivo(false)} style={styles.cancelTimer}>
+            <MaterialCommunityIcons name="close" size={20} color="#FF9A6A" />
+          </TouchableOpacity>
+        </View>
+      )}
 
 
       {/* =================================================
@@ -1032,6 +1098,22 @@ export default function CookingScreen() {
 
         </View>
 
+        {/* =================================================
+            BOTÓN DE TEMPORIZADOR
+        ================================================= */}
+        {pasoActualData?.tiempo && !timerActivo && (
+          <TouchableOpacity
+            activeOpacity={0.8}
+            style={styles.timerButton}
+            onPress={() => iniciarTemporizador(pasoActualData.tiempo)}
+          >
+            <MaterialCommunityIcons name="timer-outline" size={22} color="#24140A" />
+            <AppText style={styles.timerButtonText}>
+              Iniciar temporizador: {pasoActualData.tiempo}
+            </AppText>
+          </TouchableOpacity>
+        )}
+
 
         <CookingStep
 
@@ -1243,13 +1325,8 @@ const styles =
 
 
     screen: {
-
-      backgroundColor:
-        KitchenColors.background,
-
-      paddingBottom:
-        140,
-
+      backgroundColor: KitchenColors.background,
+      paddingBottom: 140,
     },
 
 
@@ -1257,277 +1334,129 @@ const styles =
     // HERO
     // ==================================================
 
-
     hero: {
-
-      backgroundColor:
-        '#211510',
-
-      borderRadius:
-        26,
-
-      borderWidth:
-        1,
-
-      borderColor:
-        '#65452F',
-
-      padding:
-        19,
-
-      marginBottom:
-        16,
-
+      backgroundColor: '#211510',
+      borderRadius: 26,
+      borderWidth: 1,
+      borderColor: '#65452F',
+      padding: 19,
+      marginBottom: 16,
     },
 
 
     heroTop: {
-
-      flexDirection:
-        'row',
-
-      alignItems:
-        'center',
-
+      flexDirection: 'row',
+      alignItems: 'center',
     },
 
 
     backButton: {
-
-      width:
-        44,
-
-      height:
-        44,
-
-      borderRadius:
-        15,
-
-      backgroundColor:
-        '#372319',
-
-      borderWidth:
-        1,
-
-      borderColor:
-        '#765039',
-
-      alignItems:
-        'center',
-
-      justifyContent:
-        'center',
-
-      marginRight:
-        11,
-
+      width: 44,
+      height: 44,
+      borderRadius: 15,
+      backgroundColor: '#372319',
+      borderWidth: 1,
+      borderColor: '#765039',
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginRight: 11,
     },
 
 
     heroIdentity: {
-
-      flex:
-        1,
-
+      flex: 1,
     },
 
 
     heroEyebrow: {
-
-      color:
-        '#C17D48',
-
-      fontSize:
-        8,
-
-      fontWeight:
-        '900',
-
-      letterSpacing:
-        1.5,
-
+      color: '#C17D48',
+      fontSize: 8,
+      fontWeight: '900',
+      letterSpacing: 1.5,
     },
 
 
     heroTitle: {
-
-      color:
-        '#FFF3DD',
-
-      fontSize:
-        20,
-
-      lineHeight:
-        25,
-
-      fontWeight:
-        '900',
-
-      marginTop:
-        3,
-
+      color: '#FFF3DD',
+      fontSize: 20,
+      lineHeight: 25,
+      fontWeight: '900',
+      marginTop: 3,
     },
 
 
     stepBadge: {
-
-      minWidth:
-        51,
-
-      height:
-        51,
-
-      borderRadius:
-        16,
-
-      backgroundColor:
-        '#19100C',
-
-      borderWidth:
-        1,
-
-      borderColor:
-        '#4A3326',
-
-      alignItems:
-        'center',
-
-      justifyContent:
-        'center',
-
-      marginLeft:
-        9,
-
+      minWidth: 51,
+      height: 51,
+      borderRadius: 16,
+      backgroundColor: '#19100C',
+      borderWidth: 1,
+      borderColor: '#4A3326',
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginLeft: 9,
     },
 
 
     stepBadgeValue: {
-
-      color:
-        '#F2B35B',
-
-      fontSize:
-        18,
-
-      fontWeight:
-        '900',
-
+      color: '#F2B35B',
+      fontSize: 18,
+      fontWeight: '900',
     },
 
 
     stepBadgeLabel: {
-
-      color:
-        '#8E735F',
-
-      fontSize:
-        6,
-
-      fontWeight:
-        '900',
-
-      letterSpacing:
-        0.8,
-
+      color: '#8E735F',
+      fontSize: 6,
+      fontWeight: '900',
+      letterSpacing: 0.8,
     },
 
 
     progressHeader: {
-
-      flexDirection:
-        'row',
-
-      justifyContent:
-        'space-between',
-
-      alignItems:
-        'center',
-
-      marginTop:
-        19,
-
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginTop: 19,
     },
 
 
     progressLabel: {
-
-      color:
-        '#8E735F',
-
-      fontSize:
-        8,
-
-      fontWeight:
-        '900',
-
-      letterSpacing:
-        1.3,
-
+      color: '#8E735F',
+      fontSize: 8,
+      fontWeight: '900',
+      letterSpacing: 1.3,
     },
 
 
     progressPercent: {
-
-      color:
-        '#F2B35B',
-
-      fontSize:
-        14,
-
-      fontWeight:
-        '900',
-
+      color: '#F2B35B',
+      fontSize: 14,
+      fontWeight: '900',
     },
 
 
     progressTrack: {
-
-      height:
-        8,
-
-      backgroundColor:
-        '#3A2A20',
-
-      borderRadius:
-        999,
-
-      overflow:
-        'hidden',
-
-      marginTop:
-        9,
-
+      height: 8,
+      backgroundColor: '#3A2A20',
+      borderRadius: 999,
+      overflow: 'hidden',
+      marginTop: 9,
     },
 
 
     progressFill: {
-
-      height:
-        '100%',
-
-      backgroundColor:
-        '#F2B35B',
-
-      borderRadius:
-        999,
-
+      height: '100%',
+      backgroundColor: '#F2B35B',
+      borderRadius: 999,
     },
 
 
     progressCaption: {
-
-      color:
-        '#9D8069',
-
-      fontSize:
-        10,
-
-      fontWeight:
-        '700',
-
-      marginTop:
-        7,
-
+      color: '#9D8069',
+      fontSize: 10,
+      fontWeight: '700',
+      marginTop: 7,
     },
 
 
@@ -1535,398 +1464,181 @@ const styles =
     // CHEF
     // ==================================================
 
-
     chefCard: {
-
-      marginTop:
-        Spacing.md,
-
-      backgroundColor:
-        '#251A14',
-
-      borderRadius:
-        23,
-
-      borderWidth:
-        1,
-
-      borderColor:
-        '#805437',
-
-      padding:
-        18,
-
+      marginTop: Spacing.md,
+      backgroundColor: '#251A14',
+      borderRadius: 23,
+      borderWidth: 1,
+      borderColor: '#805437',
+      padding: 18,
     },
 
 
     chefHeader: {
-
-      flexDirection:
-        'row',
-
-      alignItems:
-        'center',
-
+      flexDirection: 'row',
+      alignItems: 'center',
     },
 
 
     chefIcon: {
-
-      width:
-        48,
-
-      height:
-        48,
-
-      borderRadius:
-        16,
-
-      backgroundColor:
-        '#3A2418',
-
-      alignItems:
-        'center',
-
-      justifyContent:
-        'center',
-
-      marginRight:
-        11,
-
+      width: 48,
+      height: 48,
+      borderRadius: 16,
+      backgroundColor: '#3A2418',
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginRight: 11,
     },
 
 
     chefIdentity: {
-
-      flex:
-        1,
-
+      flex: 1,
     },
 
 
     chefEyebrow: {
-
-      color:
-        '#C17D48',
-
-      fontSize:
-        8,
-
-      fontWeight:
-        '900',
-
-      letterSpacing:
-        1.4,
-
+      color: '#C17D48',
+      fontSize: 8,
+      fontWeight: '900',
+      letterSpacing: 1.4,
     },
 
 
     chefTitle: {
-
-      color:
-        '#FFF3DD',
-
-      fontSize:
-        16,
-
-      fontWeight:
-        '900',
-
-      marginTop:
-        2,
-
+      color: '#FFF3DD',
+      fontSize: 16,
+      fontWeight: '900',
+      marginTop: 2,
     },
 
 
     chefText: {
-
-      marginTop:
-        15,
-
-      color:
-        '#E2CAB2',
-
-      fontSize:
-        14,
-
-      lineHeight:
-        22,
-
+      marginTop: 15,
+      color: '#E2CAB2',
+      fontSize: 14,
+      lineHeight: 22,
     },
 
 
     keyBadge: {
-
-      flexDirection:
-        'row',
-
-      alignItems:
-        'center',
-
-      gap:
-        4,
-
-      paddingHorizontal:
-        8,
-
-      paddingVertical:
-        6,
-
-      borderRadius:
-        999,
-
-      backgroundColor:
-        '#3B2719',
-
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 4,
+      paddingHorizontal: 8,
+      paddingVertical: 6,
+      borderRadius: 999,
+      backgroundColor: '#3B2719',
     },
 
 
     keyBadgeText: {
-
-      color:
-        '#F2B35B',
-
-      fontSize:
-        7,
-
-      fontWeight:
-        '900',
-
+      color: '#F2B35B',
+      fontSize: 7,
+      fontWeight: '900',
     },
 
 
     criticalBadge: {
-
-      flexDirection:
-        'row',
-
-      alignItems:
-        'center',
-
-      gap:
-        4,
-
-      paddingHorizontal:
-        8,
-
-      paddingVertical:
-        6,
-
-      borderRadius:
-        999,
-
-      backgroundColor:
-        '#40231A',
-
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 4,
+      paddingHorizontal: 8,
+      paddingVertical: 6,
+      borderRadius: 999,
+      backgroundColor: '#40231A',
     },
 
 
     criticalBadgeText: {
-
-      color:
-        '#FF9A6A',
-
-      fontSize:
-        7,
-
-      fontWeight:
-        '900',
-
+      color: '#FF9A6A',
+      fontSize: 7,
+      fontWeight: '900',
     },
 
 
     objectiveCard: {
-
-      marginTop:
-        15,
-
-      flexDirection:
-        'row',
-
-      backgroundColor:
-        '#1D1511',
-
-      borderRadius:
-        16,
-
-      borderWidth:
-        1,
-
-      borderColor:
-        '#473126',
-
-      padding:
-        12,
-
+      marginTop: 15,
+      flexDirection: 'row',
+      backgroundColor: '#1D1511',
+      borderRadius: 16,
+      borderWidth: 1,
+      borderColor: '#473126',
+      padding: 12,
     },
 
 
     objectiveIcon: {
-
-      width:
-        36,
-
-      height:
-        36,
-
-      borderRadius:
-        12,
-
-      backgroundColor:
-        '#342219',
-
-      alignItems:
-        'center',
-
-      justifyContent:
-        'center',
-
-      marginRight:
-        10,
-
+      width: 36,
+      height: 36,
+      borderRadius: 12,
+      backgroundColor: '#342219',
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginRight: 10,
     },
 
 
     objectiveContent: {
-
-      flex:
-        1,
-
+      flex: 1,
     },
 
 
     objectiveLabel: {
-
-      color:
-        '#A57B5C',
-
-      fontSize:
-        7,
-
-      fontWeight:
-        '900',
-
-      letterSpacing:
-        1.1,
-
+      color: '#A57B5C',
+      fontSize: 7,
+      fontWeight: '900',
+      letterSpacing: 1.1,
     },
 
 
     objectiveText: {
-
-      color:
-        '#E8D3BE',
-
-      fontSize:
-        12,
-
-      lineHeight:
-        18,
-
-      fontWeight:
-        '700',
-
-      marginTop:
-        3,
-
+      color: '#E8D3BE',
+      fontSize: 12,
+      lineHeight: 18,
+      fontWeight: '700',
+      marginTop: 3,
     },
 
 
     importantNotice: {
-
-      marginTop:
-        12,
-
-      flexDirection:
-        'row',
-
-      alignItems:
-        'flex-start',
-
-      gap:
-        8,
-
-      backgroundColor:
-        '#382719',
-
-      borderRadius:
-        14,
-
-      padding:
-        11,
-
+      marginTop: 12,
+      flexDirection: 'row',
+      alignItems: 'flex-start',
+      gap: 8,
+      backgroundColor: '#382719',
+      borderRadius: 14,
+      padding: 11,
     },
 
 
     importantText: {
-
-      flex:
-        1,
-
-      color:
-        '#E8C487',
-
-      fontSize:
-        11,
-
-      lineHeight:
-        17,
-
-      fontWeight:
-        '800',
-
+      flex: 1,
+      color: '#E8C487',
+      fontSize: 11,
+      lineHeight: 17,
+      fontWeight: '800',
     },
 
 
     criticalNotice: {
-
-      marginTop:
-        12,
-
-      flexDirection:
-        'row',
-
-      alignItems:
-        'flex-start',
-
-      gap:
-        8,
-
-      backgroundColor:
-        '#3B211A',
-
-      borderRadius:
-        14,
-
-      borderWidth:
-        1,
-
-      borderColor:
-        '#78422E',
-
-      padding:
-        11,
-
+      marginTop: 12,
+      flexDirection: 'row',
+      alignItems: 'flex-start',
+      gap: 8,
+      backgroundColor: '#3B211A',
+      borderRadius: 14,
+      borderWidth: 1,
+      borderColor: '#78422E',
+      padding: 11,
     },
 
 
     criticalText: {
-
-      flex:
-        1,
-
-      color:
-        '#FFB096',
-
-      fontSize:
-        11,
-
-      lineHeight:
-        17,
-
-      fontWeight:
-        '800',
-
+      flex: 1,
+      color: '#FFB096',
+      fontSize: 11,
+      lineHeight: 17,
+      fontWeight: '800',
     },
 
 
@@ -1934,243 +1646,113 @@ const styles =
     // QUESTION
     // ==================================================
 
-
     questionCard: {
-
-      marginTop:
-        16,
-
-      backgroundColor:
-        '#1E2B1E',
-
-      borderRadius:
-        22,
-
-      borderWidth:
-        1,
-
-      borderColor:
-        '#587357',
-
-      padding:
-        17,
-
+      marginTop: 16,
+      backgroundColor: '#1E2B1E',
+      borderRadius: 22,
+      borderWidth: 1,
+      borderColor: '#587357',
+      padding: 17,
     },
 
 
     questionHeader: {
-
-      flexDirection:
-        'row',
-
-      alignItems:
-        'center',
-
+      flexDirection: 'row',
+      alignItems: 'center',
     },
 
 
     questionIcon: {
-
-      width:
-        44,
-
-      height:
-        44,
-
-      borderRadius:
-        14,
-
-      backgroundColor:
-        '#2B3D29',
-
-      alignItems:
-        'center',
-
-      justifyContent:
-        'center',
-
-      marginRight:
-        10,
-
+      width: 44,
+      height: 44,
+      borderRadius: 14,
+      backgroundColor: '#2B3D29',
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginRight: 10,
     },
 
 
     questionHeaderText: {
-
-      flex:
-        1,
-
+      flex: 1,
     },
 
 
     questionEyebrow: {
-
-      color:
-        '#8FB276',
-
-      fontSize:
-        7,
-
-      fontWeight:
-        '900',
-
-      letterSpacing:
-        1.2,
-
+      color: '#8FB276',
+      fontSize: 7,
+      fontWeight: '900',
+      letterSpacing: 1.2,
     },
 
 
     questionTitle: {
-
-      color:
-        '#EEF4E9',
-
-      fontSize:
-        16,
-
-      fontWeight:
-        '900',
-
-      marginTop:
-        2,
-
+      color: '#EEF4E9',
+      fontSize: 16,
+      fontWeight: '900',
+      marginTop: 2,
     },
 
 
     questionText: {
-
-      marginTop:
-        14,
-
-      color:
-        '#D8E4D2',
-
-      fontSize:
-        14,
-
-      lineHeight:
-        21,
-
-      fontWeight:
-        '700',
-
+      marginTop: 14,
+      color: '#D8E4D2',
+      fontSize: 14,
+      lineHeight: 21,
+      fontWeight: '700',
     },
 
 
     answerButton: {
-
-      marginTop:
-        15,
-
-      minHeight:
-        44,
-
-      borderRadius:
-        14,
-
-      backgroundColor:
-        '#9BC78A',
-
-      flexDirection:
-        'row',
-
-      alignItems:
-        'center',
-
-      justifyContent:
-        'center',
-
-      gap:
-        7,
-
+      marginTop: 15,
+      minHeight: 44,
+      borderRadius: 14,
+      backgroundColor: '#9BC78A',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 7,
     },
 
 
     answerButtonText: {
-
-      color:
-        '#1C291B',
-
-      fontSize:
-        11,
-
-      fontWeight:
-        '900',
-
+      color: '#1C291B',
+      fontSize: 11,
+      fontWeight: '900',
     },
 
 
     answerBox: {
-
-      marginTop:
-        15,
-
-      backgroundColor:
-        '#172017',
-
-      borderRadius:
-        15,
-
-      borderWidth:
-        1,
-
-      borderColor:
-        '#425940',
-
-      padding:
-        13,
-
+      marginTop: 15,
+      backgroundColor: '#172017',
+      borderRadius: 15,
+      borderWidth: 1,
+      borderColor: '#425940',
+      padding: 13,
     },
 
 
     answerLabelRow: {
-
-      flexDirection:
-        'row',
-
-      alignItems:
-        'center',
-
-      gap:
-        6,
-
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 6,
     },
 
 
     answerLabel: {
-
-      color:
-        '#F2B35B',
-
-      fontSize:
-        7,
-
-      fontWeight:
-        '900',
-
-      letterSpacing:
-        1.2,
-
+      color: '#F2B35B',
+      fontSize: 7,
+      fontWeight: '900',
+      letterSpacing: 1.2,
     },
 
 
     answerText: {
-
-      color:
-        '#E3EDD9',
-
-      fontSize:
-        13,
-
-      lineHeight:
-        20,
-
-      fontWeight:
-        '700',
-
-      marginTop:
-        8,
-
+      color: '#E3EDD9',
+      fontSize: 13,
+      lineHeight: 20,
+      fontWeight: '700',
+      marginTop: 8,
     },
 
 
@@ -2178,125 +1760,62 @@ const styles =
     // STEP
     // ==================================================
 
-
     stepSection: {
-
-      marginTop:
-        25,
-
+      marginTop: 25,
     },
 
 
     stepSectionHeader: {
-
-      marginBottom:
-        12,
-
+      marginBottom: 12,
     },
 
 
     stepSectionEyebrow: {
-
-      color:
-        '#C17D48',
-
-      fontSize:
-        8,
-
-      fontWeight:
-        '900',
-
-      letterSpacing:
-        1.5,
-
+      color: '#C17D48',
+      fontSize: 8,
+      fontWeight: '900',
+      letterSpacing: 1.5,
     },
 
 
     stepSectionTitle: {
-
-      color:
-        '#FFF3DD',
-
-      fontSize:
-        23,
-
-      fontWeight:
-        '900',
-
-      marginTop:
-        3,
-
+      color: '#FFF3DD',
+      fontSize: 23,
+      fontWeight: '900',
+      marginTop: 3,
     },
 
 
     nextHint: {
-
-      marginTop:
-        18,
-
-      flexDirection:
-        'row',
-
-      alignItems:
-        'flex-start',
-
-      gap:
-        10,
-
-      backgroundColor:
-        '#1D1511',
-
-      borderRadius:
-        17,
-
-      borderWidth:
-        1,
-
-      borderColor:
-        '#3F2D24',
-
-      padding:
-        14,
-
+      marginTop: 18,
+      flexDirection: 'row',
+      alignItems: 'flex-start',
+      gap: 10,
+      backgroundColor: '#1D1511',
+      borderRadius: 17,
+      borderWidth: 1,
+      borderColor: '#3F2D24',
+      padding: 14,
     },
 
 
     nextHintContent: {
-
-      flex:
-        1,
-
+      flex: 1,
     },
 
 
     nextHintTitle: {
-
-      color:
-        '#F1DCC7',
-
-      fontSize:
-        12,
-
-      fontWeight:
-        '900',
-
+      color: '#F1DCC7',
+      fontSize: 12,
+      fontWeight: '900',
     },
 
 
     nextHintText: {
-
-      color:
-        '#987C67',
-
-      fontSize:
-        11,
-
-      lineHeight:
-        17,
-
-      marginTop:
-        2,
-
+      color: '#987C67',
+      fontSize: 11,
+      lineHeight: 17,
+      marginTop: 2,
     },
 
 
@@ -2304,144 +1823,66 @@ const styles =
     // FINISHED
     // ==================================================
 
-
     finishedHero: {
-
-      marginTop:
-        Spacing.xl,
-
-      backgroundColor:
-        '#202B20',
-
-      borderRadius:
-        27,
-
-      borderWidth:
-        1,
-
-      borderColor:
-        '#587357',
-
-      padding:
-        26,
-
-      alignItems:
-        'center',
-
+      marginTop: Spacing.xl,
+      backgroundColor: '#202B20',
+      borderRadius: 27,
+      borderWidth: 1,
+      borderColor: '#587357',
+      padding: 26,
+      alignItems: 'center',
     },
 
 
     finishedIcon: {
-
-      width:
-        72,
-
-      height:
-        72,
-
-      borderRadius:
-        24,
-
-      backgroundColor:
-        '#9BC78A',
-
-      alignItems:
-        'center',
-
-      justifyContent:
-        'center',
-
+      width: 72,
+      height: 72,
+      borderRadius: 24,
+      backgroundColor: '#9BC78A',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
 
 
     finishedEyebrow: {
-
-      color:
-        '#8FB276',
-
-      fontSize:
-        8,
-
-      fontWeight:
-        '900',
-
-      letterSpacing:
-        1.6,
-
-      marginTop:
-        16,
-
+      color: '#8FB276',
+      fontSize: 8,
+      fontWeight: '900',
+      letterSpacing: 1.6,
+      marginTop: 16,
     },
 
 
     finishedTitle: {
-
-      color:
-        '#F2F4ED',
-
-      textAlign:
-        'center',
-
-      fontSize:
-        27,
-
-      fontWeight:
-        '900',
-
-      marginTop:
-        5,
-
+      color: '#F2F4ED',
+      textAlign: 'center',
+      fontSize: 27,
+      fontWeight: '900',
+      marginTop: 5,
     },
 
 
     finishedRecipe: {
-
-      color:
-        '#D2E5C9',
-
-      textAlign:
-        'center',
-
-      fontSize:
-        16,
-
-      fontWeight:
-        '900',
-
-      marginTop:
-        7,
-
+      color: '#D2E5C9',
+      textAlign: 'center',
+      fontSize: 16,
+      fontWeight: '900',
+      marginTop: 7,
     },
 
 
     finishedText: {
-
-      color:
-        '#B8C7B1',
-
-      textAlign:
-        'center',
-
-      marginTop:
-        12,
-
-      lineHeight:
-        21,
-
-      fontSize:
-        13,
-
+      color: '#B8C7B1',
+      textAlign: 'center',
+      marginTop: 12,
+      lineHeight: 21,
+      fontSize: 13,
     },
 
 
     finishedButton: {
-
-      marginTop:
-        Spacing.xl,
-
-      width:
-        '100%',
-
+      marginTop: Spacing.xl,
+      width: '100%',
     },
 
 
@@ -2449,271 +1890,127 @@ const styles =
     // SUCCESS
     // ==================================================
 
-
     successCard: {
-
-      marginTop:
-        Spacing.lg,
-
-      backgroundColor:
-        '#251A14',
-
-      borderRadius:
-        23,
-
-      borderWidth:
-        1,
-
-      borderColor:
-        '#795139',
-
-      padding:
-        18,
-
+      marginTop: Spacing.lg,
+      backgroundColor: '#251A14',
+      borderRadius: 23,
+      borderWidth: 1,
+      borderColor: '#795139',
+      padding: 18,
     },
 
 
     successHeader: {
-
-      flexDirection:
-        'row',
-
-      alignItems:
-        'center',
-
-      marginBottom:
-        15,
-
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 15,
     },
 
 
     successIcon: {
-
-      width:
-        45,
-
-      height:
-        45,
-
-      borderRadius:
-        15,
-
-      backgroundColor:
-        '#392319',
-
-      alignItems:
-        'center',
-
-      justifyContent:
-        'center',
-
-      marginRight:
-        10,
-
+      width: 45,
+      height: 45,
+      borderRadius: 15,
+      backgroundColor: '#392319',
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginRight: 10,
     },
 
 
     successHeaderText: {
-
-      flex:
-        1,
-
+      flex: 1,
     },
 
 
     successEyebrow: {
-
-      color:
-        '#C17D48',
-
-      fontSize:
-        7,
-
-      fontWeight:
-        '900',
-
-      letterSpacing:
-        1.2,
-
+      color: '#C17D48',
+      fontSize: 7,
+      fontWeight: '900',
+      letterSpacing: 1.2,
     },
 
 
     successTitle: {
-
-      color:
-        '#FFF3DD',
-
-      fontWeight:
-        '900',
-
-      fontSize:
-        17,
-
-      marginTop:
-        2,
-
+      color: '#FFF3DD',
+      fontWeight: '900',
+      fontSize: 17,
+      marginTop: 2,
     },
 
 
     successItem: {
-
-      flexDirection:
-        'row',
-
-      alignItems:
-        'flex-start',
-
-      paddingVertical:
-        11,
-
-      borderTopWidth:
-        1,
-
-      borderTopColor:
-        '#3F2B22',
-
+      flexDirection: 'row',
+      alignItems: 'flex-start',
+      paddingVertical: 11,
+      borderTopWidth: 1,
+      borderTopColor: '#3F2B22',
     },
 
 
     successItemIcon: {
-
-      width:
-        34,
-
-      height:
-        34,
-
-      borderRadius:
-        11,
-
-      backgroundColor:
-        '#342219',
-
-      alignItems:
-        'center',
-
-      justifyContent:
-        'center',
-
-      marginRight:
-        10,
-
+      width: 34,
+      height: 34,
+      borderRadius: 11,
+      backgroundColor: '#342219',
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginRight: 10,
     },
 
 
     successItemContent: {
-
-      flex:
-        1,
-
+      flex: 1,
     },
 
 
     successItemLabel: {
-
-      color:
-        '#C39D7C',
-
-      fontSize:
-        8,
-
-      fontWeight:
-        '900',
-
-      letterSpacing:
-        1,
-
-      textTransform:
-        'uppercase',
-
+      color: '#C39D7C',
+      fontSize: 8,
+      fontWeight: '900',
+      letterSpacing: 1,
+      textTransform: 'uppercase',
     },
 
 
     successItemText: {
-
-      color:
-        '#F2DFCB',
-
-      fontSize:
-        12,
-
-      lineHeight:
-        18,
-
-      marginTop:
-        3,
-
+      color: '#F2DFCB',
+      fontSize: 12,
+      lineHeight: 18,
+      marginTop: 3,
     },
 
 
     historyNotice: {
-
-      marginTop:
-        16,
-
-      flexDirection:
-        'row',
-
-      alignItems:
-        'center',
-
-      backgroundColor:
-        '#1D251C',
-
-      borderRadius:
-        17,
-
-      padding:
-        14,
-
-      borderWidth:
-        1,
-
-      borderColor:
-        '#435342',
-
+      marginTop: 16,
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: '#1D251C',
+      borderRadius: 17,
+      padding: 14,
+      borderWidth: 1,
+      borderColor: '#435342',
     },
 
 
     historyNoticeContent: {
-
-      flex:
-        1,
-
-      marginLeft:
-        10,
-
+      flex: 1,
+      marginLeft: 10,
     },
 
 
     historyNoticeTitle: {
-
-      color:
-        '#DCE8D5',
-
-      fontSize:
-        12,
-
-      fontWeight:
-        '900',
-
+      color: '#DCE8D5',
+      fontSize: 12,
+      fontWeight: '900',
     },
 
 
     historyNoticeText: {
-
-      color:
-        '#96A491',
-
-      fontSize:
-        10,
-
-      lineHeight:
-        16,
-
-      marginTop:
-        2,
-
+      color: '#96A491',
+      fontSize: 10,
+      lineHeight: 16,
+      marginTop: 2,
     },
 
 
@@ -2721,156 +2018,120 @@ const styles =
     // NOT FOUND
     // ==================================================
 
-
     notFoundCard: {
-
-      marginTop:
-        60,
-
-      backgroundColor:
-        '#211712',
-
-      borderRadius:
-        27,
-
-      borderWidth:
-        1,
-
-      borderColor:
-        '#51372B',
-
-      padding:
-        28,
-
-      alignItems:
-        'center',
-
+      marginTop: 60,
+      backgroundColor: '#211712',
+      borderRadius: 27,
+      borderWidth: 1,
+      borderColor: '#51372B',
+      padding: 28,
+      alignItems: 'center',
     },
 
 
     notFoundIcon: {
-
-      width:
-        76,
-
-      height:
-        76,
-
-      borderRadius:
-        24,
-
-      backgroundColor:
-        '#352319',
-
-      alignItems:
-        'center',
-
-      justifyContent:
-        'center',
-
+      width: 76,
+      height: 76,
+      borderRadius: 24,
+      backgroundColor: '#352319',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
 
 
     notFoundEyebrow: {
-
-      color:
-        '#C17D48',
-
-      fontSize:
-        8,
-
-      fontWeight:
-        '900',
-
-      letterSpacing:
-        1.5,
-
-      marginTop:
-        17,
-
+      color: '#C17D48',
+      fontSize: 8,
+      fontWeight: '900',
+      letterSpacing: 1.5,
+      marginTop: 17,
     },
 
 
     notFoundTitle: {
-
-      color:
-        '#FFF3DD',
-
-      fontSize:
-        22,
-
-      fontWeight:
-        '900',
-
-      marginTop:
-        5,
-
+      color: '#FFF3DD',
+      fontSize: 22,
+      fontWeight: '900',
+      marginTop: 5,
     },
 
 
     notFoundText: {
-
-      color:
-        '#A98D76',
-
-      fontSize:
-        13,
-
-      lineHeight:
-        20,
-
-      textAlign:
-        'center',
-
-      marginTop:
-        8,
-
+      color: '#A98D76',
+      fontSize: 13,
+      lineHeight: 20,
+      textAlign: 'center',
+      marginTop: 8,
     },
 
 
     notFoundButton: {
-
-      marginTop:
-        20,
-
-      minHeight:
-        48,
-
-      paddingHorizontal:
-        18,
-
-      borderRadius:
-        16,
-
-      backgroundColor:
-        '#F2B35B',
-
-      flexDirection:
-        'row',
-
-      alignItems:
-        'center',
-
-      justifyContent:
-        'center',
-
-      gap:
-        8,
-
+      marginTop: 20,
+      minHeight: 48,
+      paddingHorizontal: 18,
+      borderRadius: 16,
+      backgroundColor: '#F2B35B',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 8,
     },
 
 
     notFoundButtonText: {
+      color: '#24140A',
+      fontSize: 12,
+      fontWeight: '900',
+    },
 
-      color:
-        '#24140A',
 
-      fontSize:
-        12,
-
-      fontWeight:
-        '900',
-
+    // ==================================================
+    // TEMPORIZADOR (NUEVOS ESTILOS)
+    // ==================================================
+    
+    timerButton: {
+      backgroundColor: '#F2B35B',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 16,
+      borderRadius: 16,
+      marginBottom: 16,
+      gap: 8,
+    },
+    timerButtonText: {
+      color: '#24140A',
+      fontSize: 14,
+      fontWeight: '900',
+    },
+    floatingTimer: {
+      position: 'absolute',
+      top: 50,
+      alignSelf: 'center',
+      backgroundColor: '#F2B35B',
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingHorizontal: 20,
+      paddingVertical: 12,
+      borderRadius: 999,
+      zIndex: 100,
+      shadowColor: '#000',
+      shadowOpacity: 0.5,
+      shadowRadius: 10,
+      elevation: 10,
+      gap: 10,
+    },
+    floatingTimerText: {
+      color: '#1D1410',
+      fontSize: 24,
+      fontWeight: '900',
+      fontVariant: ['tabular-nums'],
+    },
+    cancelTimer: {
+      marginLeft: 10,
+      backgroundColor: '#1D1410',
+      borderRadius: 99,
+      padding: 4,
     },
 
   });
